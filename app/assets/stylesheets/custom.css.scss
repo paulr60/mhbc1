@@ -1,6 +1,7 @@
 @import "bootstrap";
 
 $grayMediumLight: #eaeaea;
+$blue1: #36c;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -81,6 +82,15 @@ p {
 	}
 }
 
+.brand {
+	color: white;
+}
+
+#banner {
+	background-color: $blue1;
+	padding: 20px 50px 40px 50px;
+}
+
 
 /* footer */
 
@@ -115,7 +125,24 @@ footer {
 
 /* sidebar */
 
-aside {
+.sidebar {
+	margin: 40px 5px;
+	padding: 10px 5px 10px 10px;
+	background-color: $grayLighter;
+	font-size: 0.9em;
+	h2 {
+		font-size: 1.5em;
+		color: black;
+		margin-bottom: 10px;
+	}
+	.subhead {
+		font-size: 1.1em;
+		font-weight: bold;
+		padding: 10px 0 5px 0;
+	}
+}
+
+.sidebar {
 	section {
 		padding: 10px 0;
 		border-top: 1px solid $grayLighter;
@@ -135,11 +162,6 @@ aside {
 			margin-bottom: 3px;
 		}
 	}
-}
-
-.gravatar {
-	float: left;
-	margin-right: 10px;
 }
 
 

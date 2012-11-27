@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-	subject { page }
+    before { FactoryGirl.create(:site_info) }
+    subject { page }
 
   	describe "Home page" do
   		before { visit root_path }

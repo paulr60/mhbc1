@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "Authorization" do
+	before { FactoryGirl.create(:site_info) }
 	subject { page }
 
 	describe "for non-signed-in users" do

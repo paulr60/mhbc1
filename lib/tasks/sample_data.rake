@@ -15,5 +15,17 @@ namespace :db do
 						password: password,
 						password_confirmation: password)
 		end
+
+		site_info = SiteInfo.create!(title: "Montgomery Hills Baptist Church",
+	 								phone: "301-681-7990",
+	 								email: "foo@example.com",
+	 								address: "9727 Georgia Ave. Silver Spring, MD 20910",
+	 								weekly: '<div class="subhead">Sundays</div>' +
+	 										"Sunday School - 9:45 a.m.<br>" +
+	 										"Worship Service - 11 a.m.<br>" +
+	 										'<div class="subhead">Wednesdays</div>' +
+	 										"Wednesday Night Live! - 6:15 p.m.<br>" +
+	 										"Bible Study, Choir Rehearsal - 7 p.m.")
+
 	end
 end
