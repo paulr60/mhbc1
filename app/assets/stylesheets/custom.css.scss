@@ -250,6 +250,12 @@ input, textarea, select, .uneditable-input {
 
 /* miscellaneous */
 
+.link_button {
+	padding: 5px;
+	/* border: 1px solid $grayLighter; */
+	border: 2px solid $grayLighter;
+}
+
 .debug_dump {
 	clear: both;
 	float: left;

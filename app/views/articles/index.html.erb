@@ -1,6 +1,13 @@
 <h1>All articles</h1>
 
-<%= will_paginate %>
+<div class="row">
+	<div class="span7">
+		<%= will_paginate %>
+	</div>
+	<div class="span2">
+		<%= link_to "New Article", new_article_path, class: "link_button" %>
+	</div>
+</div>
 
 <div class="row articles">
 	<%= render @articles %>

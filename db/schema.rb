@@ -11,19 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128210401) do
+ActiveRecord::Schema.define(:version => 20121129203104) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.string   "label"
-    t.string   "content"
-    t.string   "summary"
+    t.text     "content",    :limit => 255
+    t.text     "summary",    :limit => 255
     t.boolean  "publish"
     t.boolean  "frontpage"
     t.string   "menu"
-    t.integer  "rank"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "rank",                      :default => 5
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   create_table "site_infos", :force => true do |t|

@@ -5,12 +5,12 @@
 #  id         :integer          not null, primary key
 #  title      :string(255)
 #  label      :string(255)
-#  content    :string(255)
-#  summary    :string(255)
+#  content    :text(255)
+#  summary    :text(255)
 #  publish    :boolean
 #  frontpage  :boolean
 #  menu       :string(255)
-#  rank       :integer
+#  rank       :integer          default(5)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
