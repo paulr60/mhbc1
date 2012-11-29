@@ -1,9 +1,9 @@
 Mhbc1::Application.routes.draw do
-  get "site_infos/edit"
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :site_infos, only: [:edit, :update]
+  resources :articles
 
   root to: 'static_pages#home'
 

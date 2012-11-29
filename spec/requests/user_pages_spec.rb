@@ -87,7 +87,7 @@ describe "UserPages" do
 				let(:user) { User.find_by_email('user@example.com') }
 
 				it { should have_selector('h1', text: user.name) }
-				it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+				it { should have_success_flash('Welcome') }
 				it { should have_link('Sign out') }
 
 				describe "followed by signout" do
@@ -129,7 +129,7 @@ describe "UserPages" do
 			end
 
 			it { should have_selector('h1', text: new_name) }
-			it { should have_selector('div.alert.alert-success') }
+			it { should have_success_flash('updated') }
 			it { should have_link('Sign out', href: signout_path) }
 			specify { user.reload.name.should == new_name }
 			specify { user.reload.email.should == new_email }

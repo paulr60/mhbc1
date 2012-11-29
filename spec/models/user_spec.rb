@@ -2,11 +2,15 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
+#  author          :boolean
 #
 
 require 'spec_helper'
@@ -26,15 +30,22 @@ describe User do
     it { should respond_to(:password_confirmation) }
     it { should respond_to(:remember_token) }
     it { should respond_to(:admin) }
+    it { should respond_to(:author) }
     it { should respond_to(:authenticate) }
 
     it { should be_valid }
     it { should_not be_admin }
+    it { should_not be_author }
 
     describe "accessible attributes" do
         it "should not allow access to admin field" do
             expect do
                 User.new(admin: true)
+            end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+        end
+         it "should not allow access to author field" do
+            expect do
+                User.new(author: true)
             end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
         end
     end
@@ -46,6 +57,15 @@ describe User do
         end
 
         it { should be_admin }
+    end
+
+    describe "with author attribute set to 'true'" do
+        before do
+            @user.save!
+            @user.toggle!(:author)
+        end
+
+        it { should be_author }
     end
 
     describe "when name is not present" do

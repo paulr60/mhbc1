@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    RedCloth (4.2.9)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -132,6 +133,9 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    simple_form (2.0.4)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -154,6 +158,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth (= 4.2.9)
   annotate (= 2.5.0)
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass (= 2.0.4)
@@ -167,6 +172,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rspec-rails (= 2.11.0)
   sass-rails (= 3.2.5)
+  simple_form (= 2.0.4)
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
   will_paginate (= 3.0.3)

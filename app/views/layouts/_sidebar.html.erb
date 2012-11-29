@@ -1,4 +1,4 @@
 <div class="sidebar">
 	<h2>Weekly Schedule</h2>
-	<%= simple_format(@site_info.weekly) %>
+	<%= raw RedCloth.new(@site_info.weekly).to_html %>
 </div>
