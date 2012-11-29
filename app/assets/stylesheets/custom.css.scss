@@ -214,18 +214,25 @@ input, textarea, select, .uneditable-input {
 	}
 }
 
-.articles {
-	list-style: none;
-	margin: 0;
-	li {
-		overflow: auto;
-		padding: 10px 0;
-		border-top: 1px solid $grayLighter;
-		&:last-child {
-			border-bottom: 1px solid $grayLighter;
-		}
+.index_row {
+	padding: 10px 0;
+	overflow: auto;
+	.title {
+		float: right;
+	}
+	.action_link {
+		padding: 0 10px;
 	}
 }
+
+.index_row2 {
+	padding: 10px 0;
+	border-top: 1px solid $grayLighter;
+	&:last-child {
+		border-bottom: 1px solid $grayLighter;
+	}
+}
+
 
 #error_explanation {
 	color: #f00;

@@ -1,7 +1,16 @@
-<li>
-	<%= link_to article.title, article %>
-	<%= article.blurb(50) %>
-	| <%= link_to "Edit", edit_article_path(article) %>
-	<%= link_to "Delete", article, method: :delete,
-									 data: { confirm: "Are you sure?" } %>
-</li>
+<div class="index_row">
+	<div class="span2">
+		<%= link_to article.title, article, class: "title" %>
+	</div>
+
+	<div class="span5">
+		<%= article.blurb(200) %>
+	</div>
+
+	<div class="span2">
+		<%= link_to "Edit", edit_article_path(article), class: "action_link" %>
+		<%= link_to "Delete", article, class: "action_link",
+										method: :delete,
+										data: { confirm: "Are you sure?" } %>
+	</div>
+</div>

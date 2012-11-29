@@ -58,7 +58,7 @@ describe "ArticlePages" do
 
 			it "should list each article" do
 				Article.paginate(page: 1).each do |article|
-					page.should have_selector('li', text: article.title)
+					page.should have_selector('a', text: article.title)
 				end
 			end
 		end
