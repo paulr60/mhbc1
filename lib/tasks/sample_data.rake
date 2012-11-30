@@ -11,7 +11,7 @@ namespace :db do
 							email: "joel@example.com",
 							password: "foobar",
 							password_confirmation: "foobar")
-		admin.toggle!(:author)
+		joel.toggle!(:author)
 
 		98.times do |n|
 			name = Faker::Name.name
@@ -41,7 +41,7 @@ namespace :db do
 				content += Faker::Lorem.paragraph(4) + "\n\n"
 			end
 
-			Article.create!(title: title, content: content)
+			Article.create!(title: title, content: content, publish: true)
 		end
 
 	end

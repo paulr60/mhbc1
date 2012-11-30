@@ -13,10 +13,12 @@
 #  rank       :integer          default(5)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  author     :string(255)
 #
 
 class Article < ActiveRecord::Base
- 	attr_accessible :content, :frontpage, :label, :menu, :publish, :rank, :summary, :title
+ 	attr_accessible :content, :frontpage, :label, :menu, :publish, :rank, 
+ 					:summary, :title, :author
 
 	validates :title, presence: true
 
@@ -24,18 +26,19 @@ class Article < ActiveRecord::Base
 	def summary_text
 		if self.summary.blank?
 			self.content[0,200]
-			#"Summary for " + self.title
 		else
 			self.summary
 		end
 	end
 
-	def blurb(n_chars)
-		self.summary_text[0, n_chars]
-	end
-
 	def edit_date
 		updated_at.strftime('%b %d, %Y')
+	end
+
+	def byline
+		s = ''
+		s += ('by ' + self.author + ' - ') if !self.author.blank?
+		s + edit_date
 	end
 
 end

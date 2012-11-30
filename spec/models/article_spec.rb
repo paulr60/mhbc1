@@ -13,6 +13,7 @@
 #  rank       :integer          default(5)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  author     :string(255)
 #
 
 require 'spec_helper'

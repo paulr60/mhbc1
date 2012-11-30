@@ -225,14 +225,6 @@ input, textarea, select, .uneditable-input {
 	}
 }
 
-.index_row2 {
-	padding: 10px 0;
-	border-top: 1px solid $grayLighter;
-	&:last-child {
-		border-bottom: 1px solid $grayLighter;
-	}
-}
-
 
 #error_explanation {
 	color: #f00;
@@ -249,6 +241,13 @@ input, textarea, select, .uneditable-input {
 
 
 /* miscellaneous */
+
+.byline {
+	font-size: 0.8em;
+	color: gray;
+	font-style: italic;
+	padding-bottom: 5px;
+}
 
 .link_button {
 	padding: 5px;

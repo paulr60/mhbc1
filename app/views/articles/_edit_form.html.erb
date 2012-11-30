@@ -1,9 +1,10 @@
 <h1><%= yield(:header) %></h1>
 
+<% @article.author = string_add_name_if_missing(@article.author, @user.name) %>
+
 <div class="row">
 	<div class="span8">
 		<%= simple_form_for(@article, :html => {:class => 'form-horizontal' }) do |f| %>
-		<%-# simple_form_for @article do |f| -%>
 
 			<%-# render 'shared/error_messages' -%>
 
@@ -12,6 +13,7 @@
 			<%= f.input :title %>
 			<%= f.input :label %>
 			<%= f.input :menu %>
+			<%= f.input :author %>
 			<%= f.input :summary, :as => :text, :input_html => { :rows => 4 } %> 
 			<%= f.input :content, :as => :text %> 
 			<%= f.input :publish, hint: 'Not user-visible unless checked. Unchecked for draft.' %>

@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 
     def new
         @article = Article.new
+        @user = current_user
     end
 
     def create
@@ -18,6 +19,7 @@ class ArticlesController < ApplicationController
 
     def edit
         @article = Article.find(params[:id])
+        @user = current_user
     end
 
     def update
