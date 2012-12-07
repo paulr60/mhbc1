@@ -9,4 +9,6 @@ module ApplicationHelper
 	def filter_out_digest_error(error_msgs)
 		error_msgs.delete_if { |m| m.index('Password digest') }
 	end
+
 end
+

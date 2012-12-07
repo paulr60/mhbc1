@@ -1,14 +1,17 @@
+/*$navbarBackground: #049cdb;*/
 @import "bootstrap";
 
 $grayMediumLight: #eaeaea;
 $blue1: #36c;
+$blueLighter: #69f;
+$blueDarker: #36a;
+$blueDark: #258;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 
 /* universal */
 
@@ -83,15 +86,43 @@ p {
 	}
 }
 
-.brand {
-	color: white;
-}
-
 #banner {
 	background-color: $blue1;
 	padding: 20px 50px 40px 50px;
 }
 
+.navbar {
+	color: #bbb;
+	.brand {
+		color: #eee;
+		font-size: 16px;
+		/* font-weight: bold; */
+	}
+	.nav li a {
+		color: #bbb;
+		&:hover {
+			color: white;
+			background-color: $blueDark;
+		}
+	}
+}
+
+.navbar-inner {
+	background-color: $blueDark;
+	background-image: none;
+}
+
+.dropdown-menu {
+	background-color: $blueDark;
+	&:hover {
+		color: white;
+		background-color: $blueDark;
+	}
+}
+
+ul.nav li.dropdown:hover ul.dropdown-menu {
+	display: block;
+}
 
 /* footer */
 

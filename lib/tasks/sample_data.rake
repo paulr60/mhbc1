@@ -26,6 +26,7 @@ namespace :db do
 		site_info = SiteInfo.create!(title: "Montgomery Hills Baptist Church",
 	 								phone: "301-681-7990",
 	 								email: "foo@example.com",
+	 								menubar: "About News Youth Ministries",
 	 								address: "9727 Georgia Ave. Silver Spring, MD 20910",
 	 								weekly: "h5. Sundays\n\n" +
 	 										"Sunday School - 9:45 a.m.\n" +
@@ -34,6 +35,14 @@ namespace :db do
 	 										"Wednesday Night Live! - 6:15 p.m.\n" +
 	 										"Bible Study, Choir Rehearsal - 7 p.m.")
 
+		about = Article.create!(title: "About us", publish: true,
+								content: "We are very friendly.  Come visit us!")
+		news = Article.create!(title: "News", publish: true,
+								content: "No news is good news.")
+		youth = Article.create!(title: "Youth program", publish: true,
+								content: "We have special programs for youths.  Contct us.")
+		ministries = Article.create!(title: "Ministries", publish: true,
+								content: "We have both local and global ministries.")
 		50.times do |n|
 			title = "Article #{n+1}"
 			content = ""

@@ -10,6 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  weekly     :string(255)
+#  menubar    :string(255)
 #
 
 require 'spec_helper'

@@ -10,10 +10,11 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  weekly     :string(255)
+#  menubar    :string(255)
 #
 
 class SiteInfo < ActiveRecord::Base
- 	attr_accessible :address, :email, :phone, :title, :weekly
+ 	attr_accessible :address, :email, :phone, :title, :weekly, :menubar
 
  	validates :address, presence: true
  	validates :title, presence: true
