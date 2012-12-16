@@ -1,15 +1,79 @@
 module MenuSystemSupport
 
+	class CmsMenu
+		#
+		# We create one of these for each CMS-type entry in navbar.
+		# (i.e. those whose names are entered in site_info object's field,
+		#  and whose content is derived from 'menu' fields in article objects)
+		# 
+		# Tree object passed in has:  name, branches, content
+		#
+		# If branches == nil, just a navbar button, else dropdown menu of branches
+		#
+		# If branches & content, need to create 1st entry in dropdown with same
+		# name as b.name (i.e. b.name->b.name) and use it to attach content to.
+		#
+		# If branches, need to examine each one to see whether it has sub-branches.
+		# For each branch with sub-branches, create a menu-block object.  When
+		# creating menu-block, if another level of branching, generate error msg.
+		# 
+		# Also, if content is an array, we need to create 'wrapper' page to hold
+		# multiple article-blurbs, one blurb per content-array item.
+		#
+		attr_reader :navbar_item
+
+		def initialize(context, tree)
+			@context = context
+			@navbar_text = tree.name
+			@tree = tree
+			@navbar_item = nil	# May be drop-down or button
+			@menu_blocks = nil	# Array of menu-blocks for sidebar display of 3rd level items
+
+			#@navbar_item = MenuButton.new(@context, tree.name, '#')
+			#@navbar_item = MenuButton.new(@context, tree.name, tree.content)
+
+			if (tree.branches == nil || tree.branches.length == 0)
+				@navbar_item = MenuButton.new(@context, tree.name, content_path(tree.content))
+			else
+				@navbar_item = create_dropdown
+			end
+		end
+
+		def create_dropdown
+			dd_items = []
+			t = @tree
+			if t.content.blank? == false
+				dd_items << MenuButton.new(@context, t.name, content_path(t.content))
+			end
+			t.branches.each do |b|
+				dd_items << MenuButton.new(@context, b.name, content_path(b.content))
+				create_menu_block(b) if (b.branches != nil && b.branches.length > 0)
+			end
+			return Dropdown.new(@context, t.name, dd_items)			
+		end
+
+		# Provides support for array of content-items, generating a 'wrapper' page
+		# that will contain blurbs for each article listed in array.
+		def content_path(content)
+			content
+		end
+	end
+
 	class MenuSystem
 
 		def initialize(context, site_info, articles)
 			@context = context
 			@user_menubar_items = site_info.menubar.split
-			@tree = MenuTree.new(@user_menubar_items)
+			@tree = MenuTree.new('root')
+			@tree.add_branches(@user_menubar_items)
 			articles.each do |a|
 				chain = a.menu
-				@tree.add_menu_chain_to_tree(chain)
+				@tree.add_menu_chain_to_tree(chain, "#{@context.article_path(a.id)}")
 			end
+
+			@tree.add_menu_chain_to_tree('Youth:Parent Information', '/articles/10')
+			@tree.add_menu_chain_to_tree('Youth:Weekly Gatherings', '/articles/11')
+
 			@navbar = create_navbar
 		end
 
@@ -24,22 +88,43 @@ module MenuSystemSupport
 		#private
 
 			def create_navbar
-				home_item = MenuButton.new(@context, 'Home', {controller: 'static_pages', action: 'home'})
-				#home_item = MenuButton.new(@context, 'Home', '/')
-				return
+				#home_item = MenuButton.new(@context, 'Home', {controller: 'static_pages', action: 'home'})
+				home_item = MenuButton.new(@context, 'Home', @context.root_path)
 				acct_menu = create_account_menu
 				cms_menus = create_cms_menus
 				Navbar.new(@context, [home_item] + cms_menus + [acct_menu])
 			end
 
 			def create_account_menu
-				MenuButton.new(@context, 'Sign in', '#')
+				if  @context.signed_in?
+					user = @context.current_user
+					dd_items = []
+					dd_items << MenuButton.new(@context, 'Profile', @context.user_path(user))
+					dd_items << MenuButton.new(@context, 'Settings', @context.edit_user_path(user))
+
+					mb = MenuButton.new(@context, 'Sign out', @context.signout_path)
+					mb.method('delete')
+					dd_items << mb
+
+					return Dropdown.new(@context, 'Account', dd_items)
+				else
+					return MenuButton.new(@context, 'Sign in', @context.signin_path)
+				end
+			end
+
+			def create_cms_menus_old
+				items = []
+				@user_menubar_items.each do |name|
+					items << MenuButton.new(@context, name, '#')
+				end
+				items
 			end
 
 			def create_cms_menus
 				items = []
-				@user_menubar_items.each do |name|
-					items << MenuButton.new(@context, name, '#')
+				@tree.branches.each do |b|
+					cm = CmsMenu.new(@context, b)
+					items << cm.navbar_item
 				end
 				items
 			end
@@ -57,39 +142,15 @@ module MenuSystemSupport
 	end
 
 	def menu_sys_test2(context, site_info, articles)
-		#Rails.logger.debug("MyDebug menu_sys_test2: #{@site_info.inspect}")
-		#Rails.logger.debug("MyDebug menu_sys_test2: #{@site_info.menubar.inspect}")
 
-		#m = MenuSystem.new(context, site_info, articles)
-		#user_menubar_items = site_info.menubar.split
-		"site_info: #{site_info.class}, #{site_info.inspect}"
-		mb_items = site_info.menubar.split
-		mt = MenuTree.new(mb_items)
-		articles.each do |a|
-			chain = a.menu
-			mt.add_menu_chain_to_tree(chain)
-		end
-		home_item = MenuButton.new(context, 'Home', root_path)
-		#home_item = MenuButton.new(context, 'Home', {controller: 'static_pages', action: 'home'})
-		acct_menu = MenuButton.new(context, 'Sign in', '#')
-		cms_menus = []
-		mb_items.each do |name|
-			cms_menus << MenuButton.new(context, name, '#')
-		end
-		nb = Navbar.new(context, [home_item] + cms_menus + [acct_menu])
-		nb.to_html
-		
 
-		ms = MenuSystem.new(context, site_info, articles)
-		
-		#ms.navbar_html
-		'end of menu_sys_test2'
+		ms = MenuSystem.new(context, site_info, articles)		
+		ms.navbar_html
 	end
 
 	def menu_sys_test(context, site_info, articles)		
-		#foo = MenuButton.new(@context, 'Home', root_path)
 		m = MenuSystem.new(context, site_info, articles)
-		m.dump_to_logger
+		#m.dump_to_logger
 		m.navbar_html
 	end
 

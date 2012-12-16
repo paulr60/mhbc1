@@ -1,10 +1,16 @@
 module TreeSupport
 	class Tree
-		attr_reader :name
+		attr_reader :name, :content
+		attr_writer :content
 
 		def initialize(name)
 			@name = name
 			@branches = []
+			@content = nil
+		end
+
+		def branches
+			@branches	# Make copy ?
 		end
 
 		def add_branch(b)
@@ -21,11 +27,8 @@ module TreeSupport
 		end
 
 		def to_s
-			s = "#{@name}: ["
-			@branches.each do |b|
-				s += b.to_s + ", "
-			end
-			s + "]"
+			b = @branches.collect {|b| b.to_s}
+			s = "#{@name}: [#{b.join(', ')}] (#{@content ? @content : ''})"
 		end
 
 		def print_tree(indent)
@@ -35,6 +38,23 @@ module TreeSupport
 			end
 			s
 		end
+
+		#
+		# If no content previously, just attach it.  If other content already
+		# attached, then (create array if necessary &) append to content array.
+		#
+		def attach_content(new_content)
+			if @content == nil
+				@content = new_content
+			else
+				if @content.kind_of? Array
+					@content << new_content
+				else
+					@content = [@content, new_content]
+				end
+			end
+		end
+
 	end
 
 

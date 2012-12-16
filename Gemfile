@@ -15,6 +15,7 @@ gem 'RedCloth', '4.2.9'
 group :development, :test do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.11.0'
+  gem 'debugger'
 end
 
 gem 'annotate', '2.5.0', group: :development

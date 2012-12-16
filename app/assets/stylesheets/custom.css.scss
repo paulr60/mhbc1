@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	font-size: 3em;
+	font-size: 2.5em;
 	letter-spacing: -1px;
 	margin-top: 10px;
 	margin-bottom: 30px;
@@ -62,9 +62,13 @@ h2 {
 	color: $grayLight;
 }
 
+h5 {
+	margin-top: 2em;
+}
+
 p {
-	font-size: 1.1em;
-	line-height: 1.7em;
+	/* font-size: 1.1em; */
+	line-height: 1.5em;
 }
 
 
@@ -100,6 +104,9 @@ p {
 	}
 	.nav li a {
 		color: #bbb;
+		font-size: 12px;
+		font-weight: normal;
+		text-shadow: none;
 		&:hover {
 			color: white;
 			background-color: $blueDark;
@@ -161,20 +168,17 @@ footer {
 	margin: 40px 5px;
 	padding: 10px 5px 10px 10px;
 	background-color: $grayLighter;
-	font-size: 0.8em;
+	p {
+		font-size: 0.8em;
+	}
 	h2 {
-		font-size: 2em;
+		font-size: 1.5em;
 		color: black;
 		margin-bottom: 15px;
 	}
 	h5 {
 		padding-top: 5px;
 		padding-bottom: 5px;
-	}
-	.subhead {
-		font-size: 1.1em;
-		font-weight: bold;
-		padding-top: 10px;
 	}
 }
 
@@ -272,6 +276,10 @@ input, textarea, select, .uneditable-input {
 
 
 /* miscellaneous */
+
+cite {
+	font-style: italic;
+}
 
 .byline {
 	font-size: 0.8em;

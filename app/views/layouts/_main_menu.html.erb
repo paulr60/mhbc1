@@ -1,21 +1,10 @@
 
-<% t1 = Tree.new('root') %>
-<% mt1 = MenuTree.new(['a','b']) %>
-
 <div class="navbar">
 	<div class="navbar-inner">
-		<%= menu_test(self, @site_info) %>
-		<%-# menu_sys_test(self, @site_info, @articles) -%>
-		<%-# MenuSupport.test1(self) -%>
+		<%-# menu_test(self, @site_info) -%>
+		<%= menu_sys_test(self, @site_info, @articles) %>
 	</div>
 </div>
 
-<%= [1,2,3,4].sum %><br>
-<%= menu_sys_test2(self, @site_info, @articles) %><br>
-<%= t1.to_s %>
 
-<%= menu_tree_test %>
-
-<%-# MenuSystemHelper.menu_system_test(self, @site_info, @articles) -%>
-
-<%-# tree_test -%>
+<%-# Mhbc1::Application.routes.inspect -%>

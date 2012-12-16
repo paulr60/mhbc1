@@ -34,4 +34,9 @@ Mhbc1::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+
+  # Raise exceptions instead of rendering exception templates
+  config.action_dispatch.show_exceptions = false
+
 end
