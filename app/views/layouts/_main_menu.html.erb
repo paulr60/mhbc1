@@ -1,8 +1,9 @@
 
 <div class="navbar">
 	<div class="navbar-inner">
-		<%-# menu_test(self, @site_info) -%>
-		<%= menu_sys_test(self, @site_info, @articles) %>
+		<%-# menu_sys_test(self, @site_info, @articles) -%>
+		<% m = MenuSystem.new(self, @site_info, @articles) %>
+		<%= m.navbar_html %>
 	</div>
 </div>
 

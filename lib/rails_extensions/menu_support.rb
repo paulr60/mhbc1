@@ -53,7 +53,7 @@ module MenuSupport
 	class Navbar < Menu
 		include ActionView::Helpers::TagHelper
 		def menu_wrapper_html(body)
-			content_tag(:ul, body, class: 'nav').html_safe
+			content_tag(:ul, body, class: 'nav pull-right').html_safe
 		end
 	end
 

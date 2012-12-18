@@ -133,20 +133,9 @@ module MenuSystemSupport
 			end
 	end
 
-	def menu_sys_test1(context, site_info, articles)
-		'foo'
-	end
-
-	def menu_sys_test2(context, site_info, articles)
-
-
-		ms = MenuSystem.new(context, site_info, articles)		
-		ms.navbar_html
-	end
 
 	def menu_sys_test(context, site_info, articles)		
 		m = MenuSystem.new(context, site_info, articles)
-		#m.dump_to_logger
 		m.navbar_html
 	end
 

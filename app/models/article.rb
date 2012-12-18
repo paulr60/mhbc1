@@ -22,10 +22,21 @@ class Article < ActiveRecord::Base
 
 	validates :title, presence: true
 
+	def styled_content
+		RedCloth.new(self.content).to_html
+	end
 
 	def summary_text
 		if self.summary.blank?
-			self.content[0,200]
+			s = self.styled_content
+			limit = 300
+			s = s[0, limit]
+			if s.length >= limit
+				i = s.rindex(' ')
+				s[0, i]
+			else
+				s
+			end
 		else
 			self.summary
 		end
