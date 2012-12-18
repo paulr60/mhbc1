@@ -171,8 +171,8 @@ footer {
 
 /* sidebar */
 
-.sidebar {
-	margin: 40px 10px;
+.sidebar-block {
+	margin: 20px 10px;
 	padding: 10px 5px 10px 10px;
 	background-color: $grayLighter;
 	p {
@@ -188,6 +188,9 @@ footer {
 		padding-top: 5px;
 		padding-bottom: 5px;
 		margin-top: 1em;
+	}
+	img {
+		margin: 10px 0;
 	}
 }
 
