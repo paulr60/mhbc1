@@ -70,10 +70,6 @@ module MenuSystemSupport
 				chain = a.menu
 				@tree.add_menu_chain_to_tree(chain, "#{@context.article_path(a.id)}")
 			end
-
-			@tree.add_menu_chain_to_tree('Youth:Parent Information', '/articles/10')
-			@tree.add_menu_chain_to_tree('Youth:Weekly Gatherings', '/articles/11')
-
 			@navbar = create_navbar
 		end
 

@@ -131,6 +131,12 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	display: block;
 }
 
+/* body */
+
+.body-area p {
+	padding-right: 15px;
+}
+
 /* footer */
 
 footer {
@@ -165,7 +171,7 @@ footer {
 /* sidebar */
 
 .sidebar {
-	margin: 40px 5px;
+	margin: 40px 10px;
 	padding: 10px 5px 10px 10px;
 	background-color: $grayLighter;
 	p {
@@ -175,10 +181,12 @@ footer {
 		font-size: 1.5em;
 		color: black;
 		margin-bottom: 15px;
+		text-align: left;
 	}
 	h5 {
 		padding-top: 5px;
 		padding-bottom: 5px;
+		margin-top: 1em;
 	}
 }
 
