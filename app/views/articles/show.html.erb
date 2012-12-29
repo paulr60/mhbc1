@@ -1,5 +1,7 @@
 <h1><%= @article.title %></h1>
 
+<%= image_tag(@article.image_url(:slide)) if @article.image_url.blank? == false %>
+
 <div class="byline">
 	<%= @article.byline %>
 </div>

@@ -14,13 +14,16 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  author     :string(255)
+#  image      :text
 #
 
 class Article < ActiveRecord::Base
- 	attr_accessible :content, :frontpage, :label, :menu, :publish, :rank, 
+ 	attr_accessible :content, :frontpage, :image, :label, :menu, :publish, :rank, 
  					:summary, :title, :author
 
 	validates :title, presence: true
+
+	mount_uploader :image, ImageUploader
 
 	def styled_content
 		RedCloth.new(self.content).to_html
