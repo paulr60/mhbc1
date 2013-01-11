@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 gem 'bootstrap-sass', '2.2.1.1'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
@@ -10,6 +10,7 @@ gem 'simple_form', '2.0.4'
 gem 'RedCloth', '4.2.9'
 gem 'rmagick', '2.13.1'
 gem 'carrierwave', '0.7.1'
+gem 'nested_form', '0.3.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

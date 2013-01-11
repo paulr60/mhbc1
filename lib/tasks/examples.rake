@@ -21,7 +21,8 @@ namespace :db do
 				content += Faker::Lorem.paragraph(4) + "\n\n"
 			end
 
-			Article.create!(title: title, content: content, publish: true)
+			Article.create!(title: title, content: content, publish: true,
+							rank: (n % 10) + 1, frontpage: (n <= 20) )
 		end
 
 	end

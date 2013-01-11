@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
-  def home
-  end
+	def home
+		@topstories = Article.where(:frontpage => true).order("rank DESC", 
+															  "updated_at DESC")
+	end
 end
