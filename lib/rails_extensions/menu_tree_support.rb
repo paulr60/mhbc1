@@ -39,9 +39,9 @@ module MenuTreeSupport
 			return nil if menu_chain.blank?
 			return nil if menu_chain_valid_navbar?(menu_chain) == false
 			items = parse_menu_chain(menu_chain)
-			add_menu_chain_items(items, content)
+			add_menu_chain_items(items, menu_chain, content)
 		end
-		def add_menu_chain_items(items, content)
+		def add_menu_chain_items(items, menu_chain, content)
 			return if !items || items.length == 0
 			i = items[0]
 			b = find_branch_by_name(i)
@@ -49,9 +49,9 @@ module MenuTreeSupport
 				b = add_branch(i)
 			end
 			if items.length > 1
-				b.add_menu_chain_items(items[1..-1], content)
+				b.add_menu_chain_items(items[1..-1], menu_chain, content)
 			else
-				b.attach_content(content)
+				b.attach_content(menu_chain, content)
 			end
 		end
 

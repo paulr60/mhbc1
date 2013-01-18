@@ -81,6 +81,22 @@ module MenuSystemSupport
 			Rails.logger.debug("MyDebug MenuSystem:\n#{debug_text}")
 		end
 
+		def find_node_with_content(content)
+			return @tree.find_branch_by_content(content)
+		end
+
+		def find_node_for_current_page()
+			c = @context.request.path
+			return find_node_with_content(c)
+		end
+
+		def test1(context)
+			r = context.request
+			n = find_node_for_current_page()
+			debugger
+			rp = r.path
+		end
+
 		#private
 
 			def create_navbar
@@ -131,12 +147,18 @@ module MenuSystemSupport
 				s += "\ttree: #{@tree.inspect}\n"
 				s
 			end
+
 	end
 
 
 	def menu_sys_test(context, site_info, articles)		
 		m = MenuSystem.new(context, site_info, articles)
 		m.navbar_html
+	end
+
+	def menu_sys_test2(context)
+		debugger
+		r = context.request
 	end
 
 end

@@ -1,11 +1,12 @@
 module TreeSupport
 	class Tree
-		attr_reader :name, :content
+		attr_reader :name, :content, :menu_path
 		attr_writer :content
 
 		def initialize(name)
 			@name = name
 			@branches = []
+			@menu_path = nil
 			@content = nil
 		end
 
@@ -26,9 +27,20 @@ module TreeSupport
 			return nil
 		end
 
+		def find_branch_by_content(s)
+			@branches.each do |b|
+				return b if b.content == s
+			end
+			@branches.each do |b|
+				subnode = b.find_branch_by_content(s)
+				return subnode if subnode != nil
+			end
+			return nil
+		end
+
 		def to_s
 			b = @branches.collect {|b| b.to_s}
-			s = "#{@name}: [#{b.join(', ')}] (#{@content ? @content : ''})"
+			s = "#{@name}: [#{b.join(', ')}] #{@menu_path} (#{@content ? @content : ''})"
 		end
 
 		def print_tree(indent)
@@ -43,7 +55,8 @@ module TreeSupport
 		# If no content previously, just attach it.  If other content already
 		# attached, then (create array if necessary &) append to content array.
 		#
-		def attach_content(new_content)
+		def attach_content(menu_chain, new_content)
+			@menu_path = menu_chain
 			if @content == nil
 				@content = new_content
 			else
