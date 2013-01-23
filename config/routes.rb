@@ -4,6 +4,7 @@ Mhbc1::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :site_infos, only: [:edit, :update]
   resources :articles
+  resources :photos
 
   root to: 'static_pages#home'
 

@@ -6,11 +6,11 @@
 	<% @topstories.each do |topstory| %>
 
 		<div class="index_row">
-			<div class="span3">
+			<div class="span2">
 				<%= image_tag(topstory.image_url(:thumb)) if !topstory.image_url.blank? %>
 			</div>
 
-			<div class="span6">
+			<div class="span7">
 				<h5><%= topstory.title %></h5>
 				<%= raw topstory.summary_text %>
 				<div class="pull-right readmore">
