@@ -1,0 +1,17 @@
+<div class="index_row">
+	<div class="span2">
+		<% cover = cover_photo(gallery.photos) %>
+		<%= image_tag(cover.image) if cover %>
+	</div>
+
+	<div class="span5">
+		<%= link_to gallery.name, gallery, class: "gallery-title" %>
+	</div>
+
+	<div class="span2">
+		<%= link_to "Edit", edit_gallery_path(gallery), class: "action_link" %>
+		<%= link_to "Delete", gallery, class: "action_link",
+										method: :delete,
+										data: { confirm: "Are you sure?" } %>
+	</div>
+</div>

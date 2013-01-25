@@ -1,0 +1,31 @@
+<h1><%= yield(:header) %></h1>
+
+<div class="row">
+	<div class="span8">
+		<%= simple_form_for(@gallery, :html => {:class => 'form-horizontal',
+												:multipart => true }) do |f| %>
+
+			<%-# render 'shared/error_messages' -%>
+
+			<%-# f.error_messages -%>
+
+			<%= f.input :name %>
+			<%= f.input :photos, :as => :text, 
+								 :input_html => { :rows => 3 }, 
+								 hint: "List photo index numbers separated by spaces" %>
+
+			<%= f.submit yield(:submit_label), class: "btn btn-large btn-primary" %>
+
+		<% end %>
+	</div>
+</div>
+
+
+<div class="photo-grid">
+	<%= will_paginate @photos %>
+		<% @show_id = true %>
+		<% @show_actions = false %>
+		<%= render @photos %>
+	<%= will_paginate @photos %>
+</div>
+

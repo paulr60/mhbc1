@@ -5,6 +5,7 @@ Mhbc1::Application.routes.draw do
   resources :site_infos, only: [:edit, :update]
   resources :articles
   resources :photos
+  resources :galleries
 
   root to: 'static_pages#home'
 
