@@ -138,6 +138,28 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	padding-right: 15px;
 }
 
+.new-content-button {
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+
+.photo-index-thumb {
+	width: 100px;
+	height: 100px;
+}
+
+.thumbnail {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	h5 {
+		margin-top: 5px;
+	}
+}
+
+.photo-grid {
+	margin-top: 15px;
+}
+
 /* footer */
 
 footer {
@@ -266,6 +288,9 @@ input, textarea, select, .uneditable-input {
 	overflow: auto;
 	.title {
 		float: right;
+	}
+	.gallery-title {
+		float: left;
 	}
 	.action_link {
 		padding: 0 10px;

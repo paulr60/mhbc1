@@ -1,0 +1,9 @@
+<h1><%= @gallery.name %></h1>
+
+<% @photos = photo_list(@gallery.photos) %>
+
+<div class="photo-grid">
+	<% @show_id = false %>
+	<% @show_actions = false %>
+	<%= render @photos %>
+</div>
