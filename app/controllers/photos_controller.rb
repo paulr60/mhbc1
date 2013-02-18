@@ -33,7 +33,7 @@ class PhotosController < ApplicationController
 	end
 
 	def index
-        @photos = Photo.paginate(page: params[:page], :per_page => 40)
+        @photos = Photo.order("name").paginate(page: params[:page], :per_page => 40)
 	end
 
 	def show

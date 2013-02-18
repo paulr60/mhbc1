@@ -4,7 +4,7 @@
 			<%= link_to(image_tag(photo.image_url(:thumb)), photo.image_url) %>
 		</div>
 		<div class="thumb-name">
-			<h5><%= (@show_id ? "#{photo.id}  " : "") + photo.name %></h5>
+			<h5><%= photo.name %></h5>
 		</div>
 		<% if @show_actions %>
 			<div class="actions-row">

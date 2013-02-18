@@ -1,7 +1,7 @@
 namespace :db do
 
-
-	task :reload => [:reset, :defaults, :init_articles, :examples, :populate2, 'test:prepare'] do
+	task :reload => [:reset, :defaults, :init_articles, :init_photos,
+					:examples, :populate2, 'test:prepare'] do
 		puts 'DB Reload complete'
 	end
 

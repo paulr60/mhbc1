@@ -26,6 +26,8 @@
 		<% @show_id = true %>
 		<% @show_actions = false %>
 		<%= render @photos %>
-	<%= will_paginate @photos %>
+	<div class="row span9">
+		<%= will_paginate @photos %>
+	</div>
 </div>
 
