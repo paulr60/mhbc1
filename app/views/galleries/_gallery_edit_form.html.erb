@@ -10,9 +10,10 @@
 			<%-# f.error_messages -%>
 
 			<%= f.input :name %>
+			<%= f.input :description, :as => :text, :input_html => { :rows => 4 } %>
 			<%= f.input :photos, :as => :text, 
 								 :input_html => { :rows => 3 }, 
-								 hint: "List photo index numbers separated by spaces" %>
+								 hint: "List photo names separated by commas" %>
 
 			<%= f.submit yield(:submit_label), class: "btn btn-large btn-primary" %>
 

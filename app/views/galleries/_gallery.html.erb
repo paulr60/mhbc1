@@ -1,7 +1,8 @@
 <div class="index_row">
-	<div class="span2">
+<div class="gallery-row">
+	<div class="span2 gallery-cover">
 		<% cover = cover_photo(gallery.photos) %>
-		<%= image_tag(cover.image) if cover %>
+		<%= image_tag(cover.image_url(:thumb)) if cover %>
 	</div>
 
 	<div class="span5">
@@ -14,4 +15,5 @@
 										method: :delete,
 										data: { confirm: "Are you sure?" } %>
 	</div>
+</div>
 </div>

@@ -146,6 +146,14 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 .photo-index-thumb {
 	width: 100px;
 	height: 100px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.thumb-name {
+	text-align: center;
+	font-size: 12px;
 }
 
 .thumbnail {
@@ -153,6 +161,12 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	margin-bottom: 10px;
 	h5 {
 		margin-top: 5px;
+	}
+}
+
+.gallery-cover {
+	img {
+
 	}
 }
 
@@ -295,6 +309,11 @@ input, textarea, select, .uneditable-input {
 	.action_link {
 		padding: 0 10px;
 	}
+	.gallery-row {
+		line-height: 120px;
+		display: table-row;
+		vertical-align: middle;
+	}
 }
 
 
@@ -316,6 +335,14 @@ input, textarea, select, .uneditable-input {
 
 cite {
 	font-style: italic;
+}
+
+.slide-photo {
+	margin-bottom: 10px;
+}
+
+.gallery-link {
+	margin-bottom: 15px;
 }
 
 .byline {

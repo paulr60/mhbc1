@@ -36,7 +36,7 @@ class GalleriesController < ApplicationController
     end
 
     def index
-        @galleries = Gallery.paginate(page: params[:page], :per_page => 20)
+        @galleries = Gallery.paginate(page: params[:page], :per_page => 10)
     end
 
     def show

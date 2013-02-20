@@ -14,7 +14,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  author     :string(255)
-#  image      :text
+#  image      :string(255)
+#  gallery    :string(255)
 #
 
 require 'spec_helper'

@@ -10,23 +10,21 @@ module GalleriesHelper
 		errors = []
 		photos = []
 		tokens = name_list.split(',')
-		debugger
 
 		tokens.each do |tok|
 			tok.strip!
 			if tok.index('*') == nil
-		        begin
-		            photo = Photo.where("name = ?", tok)
-		            photos << photo[0]
-		        rescue
+				p = Photo.find_by_name(tok)
+				if p
+					photos << p
+				else
 		            errors << "Photo #{tok} doesn't exist"
 		        end
 		    else
-		    	tok.gsub!('*', '%')
-		        begin
-		            photo = Photo.where("name LIKE ?", tok)
-		            photo.each { |p| photos << p }
-		        rescue
+		    	matching = photos_matching_regexp(tok)
+		        if matching
+		            matching.each { |p| photos << p }
+		        else
 		            errors << "Photo #{tok} doesn't exist"
 		        end
 		    end

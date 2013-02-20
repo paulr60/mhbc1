@@ -22,13 +22,20 @@ namespace :db do
 		end
 
 		$total_files = 0
-		root = '/home/paul/Pictures/mhbc_photos/'
+		root = '/home/paul/Pictures/mhbc_photos'
 		load_dirtree(root)
 		puts "Total files = #{$total_files}"
 
-		terps = Article.create!(title: "Terps", publish: true, 
-								menu: 'About:Terps',
-								content: "Fear the Turtle.  If you are playing defense against them, watch out or a pass might hit you in the face.")
-
+		Gallery.create!(name: "Anniversary Luncheon", photos: 'anniversary*',
+						description: 'Celebrating 100 years with a special luncheon.')
+		Gallery.create!(name: "Worship", photos: 'worship*, childrens_prayer*',
+						description: 'Images from our Sunday morning worship services.')
+		Gallery.create!(name: "Music", photos: 'music*',
+						description: 'Enhancing our worship experience through music.')		
+		Gallery.create!(name: "Choir", photos: 'choir*',
+						description: 'Our Choir, led by Ms. Cheryl Spell.')
+		Gallery.create!(name: "Advent", photos: 'advent*',
+						description: 'Images from the Advent season.')
+		
 	end
 end

@@ -13,7 +13,9 @@
 
 			<%= f.input :title %>
 			<%= f.input :menu %>
-			<%= f.input :image, :as => :file %>
+			<%= f.input :image, label: "Photo", 
+						placeholder: 'Name of photo in library' %>
+			<%= f.input :gallery, placeholder: 'Name of photo gallery' %>
 			<%= f.input :author %>
 			<%= f.input :summary, :as => :text, :input_html => { :rows => 4 } %> 
 			<%= f.input :content, :as => :text %> 

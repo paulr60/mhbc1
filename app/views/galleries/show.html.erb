@@ -1,5 +1,11 @@
 <h1><%= @gallery.name %></h1>
 
+<% if @gallery.description.blank? == false %>
+	<div class="gallery-descriptoin" %>
+		<%= raw RedCloth.new(@gallery.description).to_html %>
+	</div>
+<% end %>
+
 <% @photos = photo_list(@gallery.photos) %>
 
 <div class="photo-grid">
