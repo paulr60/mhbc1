@@ -7,7 +7,9 @@
 
 		<div class="index_row">
 			<div class="span2">
-				<%= image_tag(topstory.image_url(:thumb)) if !topstory.image_url.blank? %>
+                <% if topstory.image.blank? == false %>
+                    <%= image_tag(photo_version(topstory.image, :thumb)) %>
+                <% end %>
 			</div>
 
 			<div class="span7">
