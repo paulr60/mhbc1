@@ -32,6 +32,22 @@ module MenuSupport
 		end
 	end
 
+    class Label < MenuItem
+		include ActionView::Helpers::TagHelper
+        def initialize(context, text)
+            @context = context
+            @text = text
+        end
+        def to_html
+            #s = @context.link_to(@text, '#')
+            s = @text
+            content_tag(:li, s, :class => 'active').html_safe
+        end
+        def to_s
+            "(#{@text} Active)"
+        end
+    end
+
 	class Menu < MenuItem
 		def initialize(context, items)
 			@context = context
@@ -42,6 +58,9 @@ module MenuSupport
 			menu_wrapper_html(body_html)
 		end	
 		def body_html
+            if self.class == MenuBlock
+                debugger
+            end
 			s = (@items.collect {|i| i.to_html }).join("\n")
 			s.html_safe
 		end
@@ -53,16 +72,36 @@ module MenuSupport
 	class Navbar < Menu
 		include ActionView::Helpers::TagHelper
 		def menu_wrapper_html(body)
-			content_tag(:ul, body, class: 'nav pull-right').html_safe
+			content_tag(:ul, body, :class => 'nav pull-right').html_safe
 		end
 	end
 
 	class MenuBlock < Menu
 		include ActionView::Helpers::TagHelper
+		def initialize(context, breadcrumb_data, items)
+			super(context, items)
+            @breadcrumbs = Breadcrumbs.new(breadcrumb_data)
+		end
 		def menu_wrapper_html(body)
-			content_tag(:ul, body, class: 'nav nav-list').html_safe
+            debugger
+			links = content_tag(:ul, body, :class => 'nav nav-list').html_safe
+            s = @breadcrumbs.to_html + "\n" + links
+            s.html_safe
 		end
 	end
+
+    class Breadcrumbs
+        include ActionView::Helpers::TagHelper
+        def initialize(elems)
+            @elems = elems
+        end
+        def to_html
+            elems_html = @elems.collect { |e| e.to_html }
+            s = elems_html.join(' <span class="divider">/</span> ')
+            s2 = content_tag(:ul, s.html_safe, :class => 'breadcrumb').html_safe
+            s2
+        end
+    end
 
 	class Dropdown < Menu
 		include ActionView::Helpers::TagHelper

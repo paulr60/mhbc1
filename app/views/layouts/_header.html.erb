@@ -3,8 +3,8 @@
 		<div class="container">
 			<%= link_to @site_info.title, root_path, class: "brand" %>
 			<nav>
-				<% m = MenuSystem.new(self, @site_info, @articles) %>
-				<%= m.navbar_html %>
+				<%-# m = MenuSystem.new(self, @site_info, @articles) -%>
+				<%= @ms.navbar_html %>
 				<%-# m.test1(self) -%>
 			</nav>
 		</div>

@@ -4,11 +4,11 @@ module MenuTreeSupport
 	
 	class MenuTree < Tree
 
-		def initialize(name)
-			super(name)
+		def initialize(parent, name)
+			super(parent, name)
 		end	
 		def add_branch(b)
-			t = MenuTree.new(b)
+			t = MenuTree.new(self, b)
 			@branches << t
 			t
 		end
@@ -16,7 +16,7 @@ module MenuTreeSupport
 			branches.each { |b| add_branch(b) }
 		end
 		def parse_menu_chain(menu_chain)
-			# Input string is colon-seperated menu-tree starting w/ navbar entry
+			# Input string is colon-separated menu-tree starting w/ navbar entry
 			return [] if !menu_chain || menu_chain.empty?
 			items = menu_chain.split(':')
 			items.collect! { |i| i.strip }

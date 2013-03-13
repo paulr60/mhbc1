@@ -47,7 +47,6 @@ module MenuSystemSupport
 			end
 			t.branches.each do |b|
 				dd_items << MenuButton.new(@context, b.name, content_path(b.content))
-				create_menu_block(b) if (b.branches != nil && b.branches.length > 0)
 			end
 			return Dropdown.new(@context, t.name, dd_items)			
 		end
@@ -59,12 +58,69 @@ module MenuSystemSupport
 		end
 	end
 
+    class BreadcrumbData
+        def initialize(context, tree, full_path)
+            @context = context
+            @tree = tree
+            @full_path = full_path
+            @path_elems = @full_path.split(':')
+            @partial_paths = compute_partials(@path_elems)
+        end
+        def compute_partials(elem_list)
+            elems = elem_list.clone
+            return [] if !elems || elems.length == 0
+            partials = []
+            while elems.length > 0 do
+                partials << elems.join(':')
+                elems.pop
+            end
+            return partials.reverse
+        end
+        def link_list()
+            paths = @partial_paths.clone
+            paths.pop   # Remove last elem, it is current/active & becomes label
+            links = paths.collect { |p| create_link(p) }
+            links << Label.new(@context, @path_elems[-1])
+            return links
+        end
+        def create_link(menu_path)
+            # menu_path is colon-separated. name is last elem, i.e. what
+            # would appear in the last level menu of menu chain.
+            #
+            # We need to find the associated content (i.e. page to link to)
+            # by searching down menu tree to find node with menu_path in it.
+            #
+            node = @tree.find_by_menu_path(menu_path)
+            return nil if node == nil
+            MenuButton.new(@context, node.name, node.content)
+        end
+        def link_list_old()
+            links = []
+            0...(@partial_paths.length-1).each do |i|
+                links << create_link(@partial_path[i], @path_elems[i])
+            end
+            links << Label.new(@context, @path_elems[-1])
+            return links
+        end
+        def create_link_old(menu_path, name)
+            # menu_path is colon-separated. name is last elem, i.e. what
+            # would appear in the last level menu of menu chain.
+            #
+            # We need to find the associated content (i.e. page to link to)
+            # by searching down menu tree to find node with menu_path in it.
+            #
+            node = @tree.find_by_menu_path(menu_path)
+            return nil if node == nil
+            MenuButton.new(@context, name, node.content)
+        end
+    end
+
 	class MenuSystem
 
 		def initialize(context, site_info, articles)
 			@context = context
 			@user_menubar_items = site_info.menubar.split
-			@tree = MenuTree.new('root')
+			@tree = MenuTree.new(nil, 'root')
 			@tree.add_branches(@user_menubar_items)
 			articles.each do |a|
 				chain = a.menu
@@ -89,6 +145,31 @@ module MenuSystemSupport
 			c = @context.request.path
 			return find_node_with_content(c)
 		end
+
+        def create_menu_block()
+            debugger
+            tree = find_node_for_current_page()
+            menu_path = tree.menu_path
+            return nil if tree == nil
+            if tree.branches == nil || tree.branches.length == 0
+                branches = tree.parent.branches     # List siblings
+                breadcrumbs = BreadcrumbData.new(@context, tree.parent, menu_path)
+            else
+                branches = tree.branches            # List children
+                breadcrumbs = BreadcrumbData.new(tree, menu_path)
+            end
+            crumbs = breadcrumbs.link_list()
+            items = []
+            branches.each do |b|
+                if b == tree    # Is this branch the current page ?
+                    items << Label.new(@context, b.name)
+                else
+                    items << MenuButton.new(@context, b.name, b.content)
+                end
+            end
+			mb =  MenuBlock.new(@context, crumbs, items)
+            return mb
+        end
 
 		def test1(context)
 			r = context.request

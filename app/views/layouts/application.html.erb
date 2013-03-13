@@ -8,9 +8,10 @@
 	  <%= render 'layouts/shim' %>
 	</head>
 	<body>
+		<% @ms = MenuSystem.new(self, @site_info, @articles) %>
 
 		<%= render 'layouts/header' %>
-
+        
 		<div class="container">
 			<%= render 'layouts/banner' %>
 

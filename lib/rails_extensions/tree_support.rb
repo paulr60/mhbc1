@@ -1,10 +1,11 @@
 module TreeSupport
 	class Tree
-		attr_reader :name, :content, :menu_path
+		attr_reader :name, :parent, :content, :menu_path, :branches
 		attr_writer :content
 
-		def initialize(name)
+		def initialize(parent, name)
 			@name = name
+            @parent = parent
 			@branches = []
 			@menu_path = nil
 			@content = nil
@@ -15,7 +16,7 @@ module TreeSupport
 		end
 
 		def add_branch(b)
-			t = Tree.new(b)
+			t = Tree.new(self, b)
 			@branches << t
 			t
 		end
@@ -37,6 +38,18 @@ module TreeSupport
 			end
 			return nil
 		end
+
+        def find_by_menu_path(s)
+            return self if @menu_path == s
+			@branches.each do |b|
+				return b if b.menu_path == s
+			end
+			@branches.each do |b|
+				subnode = b.find_by_menu_path(s)
+				return subnode if subnode != nil
+			end
+			return nil
+        end
 
 		def to_s
 			b = @branches.collect {|b| b.to_s}
@@ -72,7 +85,7 @@ module TreeSupport
 
 
 	def tree_test
-		t = Tree.new('root')
+		t = Tree.new(nil, 'root')
 		['a','b','c'].each do |i|
 			t1 = t.add_branch(i)
 			['1','2','3'].each do |j|
