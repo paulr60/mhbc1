@@ -148,20 +148,22 @@ module MenuSystemSupport
 
         def create_menu_block()
             debugger
-            tree = find_node_for_current_page()
-            menu_path = tree.menu_path
-            return nil if tree == nil
-            if tree.branches == nil || tree.branches.length == 0
-                branches = tree.parent.branches     # List siblings
-                breadcrumbs = BreadcrumbData.new(@context, tree.parent, menu_path)
+            this_node = find_node_for_current_page()
+            return nil if this_node == nil
+            
+            menu_path = this_node.menu_path
+            if this_node.branches == nil || this_node.branches.length == 0
+                tree = this_node.parent #Show links for siblings
             else
-                branches = tree.branches            # List children
-                breadcrumbs = BreadcrumbData.new(tree, menu_path)
+                tree = this_node        #Show links for children
             end
+            branches = tree.branches
+            breadcrumbs = BreadcrumbData.new(@context, tree, menu_path)
             crumbs = breadcrumbs.link_list()
+
             items = []
-            branches.each do |b|
-                if b == tree    # Is this branch the current page ?
+            tree.branches.each do |b|
+                if b == this_node    # Is this branch the current page ?
                     items << Label.new(@context, b.name)
                 else
                     items << MenuButton.new(@context, b.name, b.content)
