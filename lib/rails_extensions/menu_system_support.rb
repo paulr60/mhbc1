@@ -147,7 +147,6 @@ module MenuSystemSupport
 		end
 
         def create_menu_block()
-            debugger
             this_node = find_node_for_current_page()
             return nil if this_node == nil
             
@@ -176,7 +175,6 @@ module MenuSystemSupport
 		def test1(context)
 			r = context.request
 			n = find_node_for_current_page()
-			debugger
 			rp = r.path
 		end
 
@@ -231,17 +229,6 @@ module MenuSystemSupport
 				s
 			end
 
-	end
-
-
-	def menu_sys_test(context, site_info, articles)		
-		m = MenuSystem.new(context, site_info, articles)
-		m.navbar_html
-	end
-
-	def menu_sys_test2(context)
-		debugger
-		r = context.request
 	end
 
 end

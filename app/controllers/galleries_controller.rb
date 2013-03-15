@@ -1,4 +1,6 @@
 class GalleriesController < ApplicationController
+    before_filter :signed_in_user,  only: [:new, :create, :edit, :update, :destroy]
+    before_filter :privileged_user, only: [:new, :create, :edit, :update, :destroy]
 
     def new
         @gallery = Gallery.new

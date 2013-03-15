@@ -58,9 +58,7 @@ module MenuSupport
 			menu_wrapper_html(body_html)
 		end	
 		def body_html
-            if self.class == MenuBlock
-                debugger
-            end
+            debugger if false && (self.class == MenuBlock)
 			s = (@items.collect {|i| i.to_html }).join("\n")
 			s.html_safe
 		end
@@ -83,7 +81,6 @@ module MenuSupport
             @breadcrumbs = Breadcrumbs.new(breadcrumb_data)
 		end
 		def menu_wrapper_html(body)
-            debugger
 			links = content_tag(:ul, body, :class => 'nav nav-list').html_safe
             s = @breadcrumbs.to_html + "\n" + links
             s.html_safe

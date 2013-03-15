@@ -1,4 +1,7 @@
 class PhotosController < ApplicationController
+    before_filter :signed_in_user,  only: [:index, :new, :create, :edit, :update, :destroy]
+    before_filter :privileged_user, only: [:index, :new, :create, :edit, :update, :destroy]
+
 	def new
 		@photo = Photo.new
 	end

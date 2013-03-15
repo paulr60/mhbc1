@@ -57,7 +57,7 @@ class ArticlesController < ApplicationController
         end
 
         def privileged_user
-            redirect_to(root_path) unless (current_user.admin? || current_user.author?)
+            redirect_to(root_path) unless privileged_user?(current_user)
         end
 
 end
