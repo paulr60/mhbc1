@@ -14,6 +14,11 @@ Mhbc1::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
 
   match '/content', to: 'static_pages#content'
+
+  match '/authoring_help', to: 'static_pages#help_general'
+  match '/articles_help', to: 'static_pages#help_articles'
+  match '/photos_help', to: 'static_pages#help_photos'
+  match '/site_info_help', to: 'static_pages#help_site_info'
   
   match '/contact', to: 'static_pages#contact'
 

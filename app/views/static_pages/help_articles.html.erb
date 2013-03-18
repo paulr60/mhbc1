@@ -1,0 +1,101 @@
+<h1>Articles Help</h1>
+
+<p>
+<em>Articles</em> can be used in a variety of ways on the website.
+Notices to be displayed on the front page, stories posted on the
+<em>News</em> page, and all of the content found under the menubar are
+created as <em>Articles</em> with different settings on some of the
+parameters.
+</p>
+
+<h5>Drafts</h5>
+<p>When an article is being written, but is still in draft form, it can be
+saved without immediately showing up on the website.  It will not appear on the
+site until the <em>Publish</em> flag is set.  Until then, it is treated
+as a <em>draft</em>.
+</p>
+
+<h5>Sorting</h5>
+<p>
+One of the parameters that can be set on each article is a <em>Ranking</em>
+that governs the order in which groups of articles are displayed.  Higher ranked
+articles are displayed first.  Articles with the same ranking are displayed with
+the newest (or most recently updated) article shown first.
+</p>
+
+<h5>Front Page</h5>
+<p>
+Important announcements to be displayed on the front page are noted by setting
+the <em>Front Page</em> flag on that article.  A summary blurb a few lines long
+will be shown for each article along with a <em>Read More</em> link that will
+take the reader to the full text of the story.  If the <em>Summary</em> field
+is filled in that content will be used for this blurb, otherwise the first few
+lines of the article's body are used.
+</p>
+
+<h5>Menu System</h5>
+<p>
+In many cases it will be desirable to group new articles with related content
+under the menubar.  To do this, fill in the <em>Menu Path</em> field with the
+list of menu entries that should be followed to get to this article.  The
+value to enter in this field will be the sequence of menu items taken to get
+to this article's page, starting with the value in the menubar.  The entries
+are separated by colons.
+</p>
+
+<h5>News Page</h5>
+<p>
+All articles that don't have a value specified in the <em>Menu Path</em> field
+will appear on the News Page instead.  A summary blurb is displayed for each
+article (as is done on the Front Page) with a link to the full text.
+</p>
+
+<h5>Photos and Photo Galleries</h5>
+<p>
+A photo or a photo gallery can be attached to each article.  If the photo field
+is filled in with the name of a photo that has been uploaded into the photo
+library, it will be displayed at the top of the article.  If the gallery field
+is filled in with the name of an existing photo gallery, the first photo in the
+gallery will be shown at the top of the article with a link to the rest of the
+photos in the gallery.  It doesn't make sense to fill in both fields, only one
+or the other.
+</p>
+
+<h5>Byline</h5>
+<p>
+A <em>byline</em> is displayed at the top of each article that lists the author
+and the most recent edit date for the story.  The author field is filled in
+automatically with the name of the user who made the edit.  If an article is
+originally written by one user and later changed by another, the author field
+will list the names of all contributors to the story.  The field's value can
+be changed manually if desired, but usually the automatic content should suffice.
+</p>
+
+<div class="well">
+    
+<h5>Formatting</h5>
+<p>
+The content entered for the article's body is processed by a text-formatting
+tool before displaying it.  This processing supports a wide variety of styles
+such as bold, italic, large-font headlines, etc. as well as things such as
+bullet lists and links to other web pages.  The full documentation can be
+found in the right hand column of the page whose link follows.  The page that
+is immediately linked below contains some of the more common features.
+</p>
+<a href="http://www.redcloth.org/textile/phrase-modifiers">
+    Red Cloth Text Formatting Notations</a>
+
+<br></br>
+<p>
+In addition to the capabilities described in the documentation linked above,
+if you want to put a section of the article's text into a box like this one,
+you can surround it with:
+<pre>
+&lt;div class="well"&gt;
+   .
+   .
+   .
+&lt;/div&gt;
+</pre>
+</p>
+</div>

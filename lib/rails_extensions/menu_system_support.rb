@@ -192,6 +192,10 @@ module MenuSystemSupport
 				if  @context.signed_in?
 					user = @context.current_user
 					dd_items = []
+
+                    if @context.privileged_user?(user)
+                        dd_items << MenuButton.new(@context, 'Edit Content', '/content')
+                    end
 					dd_items << MenuButton.new(@context, 'Profile', @context.user_path(user))
 					dd_items << MenuButton.new(@context, 'Settings', @context.edit_user_path(user))
 

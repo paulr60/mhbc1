@@ -143,6 +143,28 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	margin-bottom: 20px;
 }
 
+.content-authoring-page {
+    .new-content-button {
+        margin-bottom: 80px;
+    }
+    .link_button {
+        padding: 10px;
+    }
+    .btn-info {
+        padding: 10px;
+    }
+}
+
+.link_button {
+	padding: 5px;
+	/* border: 1px solid $grayLighter; */
+	border: 2px solid #aaa;
+}
+
+.btn-info {
+    padding: 5px;
+}
+
 .photo-index-thumb {
 	width: 100px;
 	height: 100px;
@@ -355,11 +377,6 @@ cite {
 	padding-bottom: 5px;
 }
 
-.link_button {
-	padding: 5px;
-	/* border: 1px solid $grayLighter; */
-	border: 2px solid $grayLighter;
-}
 
 .debug_dump {
 	clear: both;

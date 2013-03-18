@@ -1,0 +1,59 @@
+<h1>Content Authoring</h1>
+
+<div class="content-authoring-page">
+    
+    <div class="row span9">
+        <div class="new-content-button">
+            <span class="span2">
+            <%= link_to "General Help", '/authoring_help', class: "btn-info" %>
+            </span>
+        </div>
+    </div>
+
+    <div class="row span9">
+        <div class="new-content-button">
+            <span class="span2">
+            <%= link_to "Article Help", '/articles_help', class: "btn-info" %>
+            </span>
+            <span class="span2">
+            <%= link_to "Articles", articles_path, class: "link_button" %>
+            </span>
+        </div>
+    </div>
+
+    <div class="row span9">
+        <div class="new-content-button">
+            <span class="span2">
+            <%= link_to "Photo Help", '/photos_help', class: "btn-info" %>
+            </span>
+            <span class="span2">
+            <%= link_to "Photos", photos_path, class: "link_button" %>
+            </span>
+            <span class="span2">
+            <%= link_to "Galleries", galleries_path, class: "link_button" %>
+            </span>
+        </div>
+    </div>
+
+    <div class="row span9">
+        <div class="new-content-button">
+            <span class="span2">
+            <%= link_to "Site Info Help", '/site_info_help', class: "btn-info" %>
+            </span>
+            <span class="span2">
+            <%= link_to "Site Info", '/site_infos/1/edit', class: "link_button" %>
+            </span>
+        </div>
+    </div>
+
+    <% if current_user.admin? %>
+        <div class="row span9">
+            <div class="new-content-button">
+                <span class="span2">
+                <%= link_to "Users", '/users', class: "link_button" %>
+                </span>
+            </div>
+        </div>
+    <% end %>
+
+</div>
