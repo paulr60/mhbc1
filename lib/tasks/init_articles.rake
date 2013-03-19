@@ -179,8 +179,6 @@ Adapted
 MISSION
 )
 
-		news = Article.create!(title: "News", publish: true, menu: 'News',
-								content: "No news is good news.")
 		youth = Article.create!(title: "Youth program", publish: true, menu: 'Youth',
 								content: <<YOUTH
 Welcome to Montgomery Hills Baptist Church Ministries for Youth

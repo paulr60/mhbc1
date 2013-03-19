@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
  			@site_info = SiteInfo.all[0]
  		end
  		def populate_articles
- 			@articles = Article.all
+ 			@all_articles = Article.all
  		end
 end

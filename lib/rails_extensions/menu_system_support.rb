@@ -183,9 +183,10 @@ module MenuSystemSupport
 			def create_navbar
 				#home_item = MenuButton.new(@context, 'Home', {controller: 'static_pages', action: 'home'})
 				home_item = MenuButton.new(@context, 'Home', @context.root_path)
+                news_item = MenuButton.new(@context, 'News', '/news')
 				acct_menu = create_account_menu
 				cms_menus = create_cms_menus
-				Navbar.new(@context, [home_item] + cms_menus + [acct_menu])
+				Navbar.new(@context, [home_item] + [news_item] + cms_menus + [acct_menu])
 			end
 
 			def create_account_menu

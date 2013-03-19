@@ -21,6 +21,7 @@ Mhbc1::Application.routes.draw do
   match '/site_info_help', to: 'static_pages#help_site_info'
   
   match '/contact', to: 'static_pages#contact'
+  match '/news', to: 'static_pages#news'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
