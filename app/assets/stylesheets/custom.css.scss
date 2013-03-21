@@ -322,6 +322,10 @@ input, textarea, select, .uneditable-input {
 	}
 }
 
+.action_link {
+    padding: 0 10px;
+}
+
 .index_row {
 	padding: 10px 0;
 	overflow: auto;
@@ -330,9 +334,6 @@ input, textarea, select, .uneditable-input {
 	}
 	.gallery-title {
 		float: left;
-	}
-	.action_link {
-		padding: 0 10px;
 	}
 	.gallery-row {
 		line-height: 120px;

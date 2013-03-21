@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     before_filter :admin_user,     only: :destroy
 
     def index
-        @users = User.paginate(page: params[:page])
+        @users = User.order("name ASC").paginate(page: params[:page])
     end
 
   	def new
@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   	end
 
     def edit
+        @user = User.find(params[:id])
     end
 
     def update
@@ -56,7 +57,7 @@ class UsersController < ApplicationController
 
         def correct_user
             @user = User.find(params[:id])
-            redirect_to(root_path) unless current_user?(@user)
+            redirect_to(root_path) unless (current_user?(@user) || current_user.admin?)
         end
 
         def admin_user
