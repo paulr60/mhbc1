@@ -28,7 +28,7 @@ _Joel S. Hawthorne, Pastor_
 
 h5. Where Are You Located?
 
-Montgomery Hills Baptist Church is located at exit 31a of the Capital Beltway, 
+Montgomery Hills Baptist Church is located at exit 31a of the Capital Beltway,
 on the corner of 9727 Georgia Ave. and Forest Glen Rd.
 
 Our office hours are Monday - Friday from 9:00 a.m. to 5:00 p.m.
@@ -42,15 +42,102 @@ h5. What to Wear
 
 Montgomery Hills is a friendly and warm congregation. We encourage you to wear clothing that \
 makes you comfortable. Many church goers choose to dress up and many choose to dress casually. \
-During the warmer months of the year, many choose to wear business casual clothing to church. 		
+During the warmer months of the year, many choose to wear business casual clothing to church.
 ABOUT
 )
 
 		contact = Article.create!(title: "Contact", publish: true, menu: 'About:Contact',
 								content: "Give us a call at 301-681-7990")
-		staff = Article.create!(title: "Staff", publish: true, menu: 'About:Staff',
-								content: "We have some staff members.  They're awesome.")
-		heritage = Article.create!(title: "Heritage & Hope", publish: true, 
+                            
+        bio_joel = Article.create!(title: "Senior Minister", publish: true,
+                                rank: 10, menu: 'About:Staff', image: 'bio_joel',
+                                content: <<BIO_JOEL
+Rev. Joel S. Hawthorne is the Senior Minister of Montgomery Hills.  He has \
+served the Lord here since July of 1998 as Senior Pastor, and also served as \
+Associate Pastor from 1985-1992.  Rev. Hawthorne is a graduate of Wesley \
+Theological Seminary in Washington, D.C.  He served the First Baptist Church \
+of Glens Falls, NY and the Briggs Memorial Baptist Church in Bethesda, MD \
+before coming to Montgomery Hills.  He is married to Terri, and has two grown \
+sons, Geoffrey and Nathan.  Rev. Hawthorne's passion is that everyone in \
+the church discover and use their God-given gifts in ministry!
+BIO_JOEL
+)
+        bio_cheryl = Article.create!(title: "Music Director", publish: true,
+                                rank: 9, menu: 'About:Staff', image: 'bio_cheryl',
+                                content: <<BIO_CHERYL
+Cheryl Spell directs the Sanctuary Choir, and oversees the youth and children's \
+choir ministries of the church.  She is responsible for the worship music on \
+Sunday mornings and other gatherings of the church family.  Her goal is that \
+each person have at least one moment in which they experience the Presence of \
+God as they worship.
+BIO_CHERYL
+)
+        bio_terri = Article.create!(title: "Administrative Assistant", publish: true,
+                                rank: 8, menu: 'About:Staff', image: 'bio_terri',
+                                content: <<BIO_TERRI
+Terri King joined the Montgomery Hills staff in May of 1987 and has used her \
+pleasant personality and Christian commitment to help the church members in a \
+multitude of activities. She does the layout and preparation of weekly bulletins \
+and monthly newsletters. Terri responds to phone calls and people needing access \
+to the church building during the week. Anticipating and acquiring supplies of \
+all kinds for the church is one of her routine activities. She heads up the \
+Wednesday meals and does the shopping for most of the food.
+
+Terri is a Minnesota Vikings fan who graduated from Bemidji State University \
+which is located in Bemidji, Minnesota.  She served as a coach for girls athletic \
+teams and substitute teacher in high school before joining the Christian Service \
+Corps.
+
+She served for two years as a short-term missionary in the United Republic of \
+Cameroon, West Africa and taught in the Saker Baptist College in Limbe, Cameroon. \
+She continued with the Christian Service Corps for five years, in the Silver \
+Spring area, as Placement Director.
+
+In addition to her staff responsibilities, she has used her many talents within \
+the choir/music ministry, as Sunday School teacher, as VBS teacher and as teacher \
+of a Spiritual Gifts class. It is not unusual to see _Takie the Clown_ \
+promoting children's activites at MHBC.
+BIO_TERRI
+)
+        bio_peggy = Article.create!(title: "Financial Secretary", publish: true,
+                                rank: 7, menu: 'About:Staff', image: 'bio_peggy',
+                                content: <<BIO_PEGGY
+Peggy Kullberg has been the financial secretary for 20 years. In this position, \
+she keeps the financial books for the church. She has been a member of Montgomery \
+Hills since 1968.  Peggy is the sister of our pastor.  She is a teacher by \
+profession and has taught in public and private schools, grades 1-8.  Peggy and \
+her family are very active in all aspects of the church.  She has worked with \
+the children in the church for over 30 years!  She heads up the nursing home \
+ministry team and volunteers much of her time to this cause.
+
+Peggy and her \
+husband, Chuck, have two children ages 18 and 23.   They enjoy vacations at the \
+beach in Cape May, New Jersey and walking their two large dogs.  When asked what \
+Peggy likes most about her job as financial secretary she said: "I have learned \
+a lot about giving.  I believe in tithing and practice it.  I recognize that \
+all gifts are equally valuable in God's sight.  The story of the Widow's Mite \
+is one I have witnessed first hand."
+BIO_PEGGY
+)
+        bio_clayton = Article.create!(title: "Pianist", publish: true,
+                                rank: 6, menu: 'About:Staff', image: 'bio_clayton',
+                                content: <<BIO_CLAYTON
+Clayton Nunes is the church pianist.
+BIO_CLAYTON
+)
+
+        bio_joel.summary = bio_joel.content
+        bio_joel.save!
+        bio_cheryl.summary = bio_cheryl.content
+        bio_cheryl.save!
+        bio_terri.summary = bio_terri.content
+        bio_terri.save!
+        bio_peggy.summary = bio_peggy.content
+        bio_peggy.save!
+        bio_clayton.summary = bio_clayton.content
+        bio_clayton.save!
+
+		heritage = Article.create!(title: "Heritage & Hope", publish: true,
 								menu: 'About:Heritage and Hope',
 								content: <<HERITAGE
 Heritage & Hope is the endowment ministry of Montgomery Hills Baptist Church. Heritage & Hope \
@@ -81,7 +168,7 @@ benefits for you.
 HERITAGE
 )
 
-		history = Article.create!(title: "History", publish: true, 
+		history = Article.create!(title: "History", publish: true,
 								menu: 'About:History',
 								content: <<HISTORY
 In November, 1912 the Columbia Association of Baptist Churches purchased property on the corner \
@@ -149,7 +236,7 @@ serve together.
 HISTORY
 )
 
-		mission = Article.create!(title: "Mission Statement", publish: true, 
+		mission = Article.create!(title: "Mission Statement", publish: true,
 								menu: 'About:Mission Statement',
 								content: <<MISSION
 _The following Mission Statement was developed by the congregation of the Montgomery Hills Baptist Church._
@@ -217,7 +304,7 @@ Peggy, Chuck Kullberg - _Kullberg@verizon.net_
 YOUTH
 )
 
-		parent_info = Article.create!(title: "Parent Information", publish: true, 
+		parent_info = Article.create!(title: "Parent Information", publish: true,
 								menu: 'Youth:Parent Information',
 								content: <<PARENT_INFO
 Our vision is to lead middle and high school youth into authentic faith in Jesus, and to \
@@ -243,9 +330,9 @@ Books (available at our library)
 Websites:
 "www.crosswalk.com/parenting/":http://www.crosswalk.com/parenting/
 PARENT_INFO
-)								
+)
 
-		weekly = Article.create!(title: "Weekly Gatherings for Youth", publish: true, 
+		weekly = Article.create!(title: "Weekly Gatherings for Youth", publish: true,
 								menu: 'Youth:Weekly Gatherings',
 								content: <<WEEKLY
 
@@ -277,7 +364,7 @@ WEEKLY
 The ongoing ministry of Montgomery Hills is directed through our Ministry Action Teams \
 (MAT Teams). We encourage the creation of new ministry teams as the Lord gives vision and \
 leads people into service. Our purpose is to help each person find a fulfilling and meaningful \
-PLACE of service in the Body of Christ. 
+PLACE of service in the Body of Christ.
 
 Ministry teams have been formed by persons who feel led to use their personal gifts to aid \
 others. Some of these activities are ministries to those outside the church congregation and \
@@ -292,7 +379,7 @@ MINISTRIES
 								"join.  Where appropriate, new teams are formed in response to " +
 								"groups that own a common vision. To view these team descriptions, " +
 								"click on the items listed on the left.")
-		
+
 		children_and_youth = Article.create!(title: "Children and Youth Ministries", publish: true,
 								menu: 'Ministries:Children and Youth',
 								content: <<CHILDREN_AND_YOUTH
@@ -306,7 +393,7 @@ h5. Nursery Team
 The Nursery Team consists of adults and teens that enjoy sharing the love of Christ with the \
 infants and toddlers that attend our church. They work on a rotating schedule so that all can \
 experience worship and Sunday School in some form. If you love infants, toddlers, rocking chairs, \
-and building blocks, this may be the ministry team for you. 
+and building blocks, this may be the ministry team for you.
 
 
 h5. Children Ministry Team
@@ -315,7 +402,7 @@ The Children Ministry Team consists of adults who work with our children's Sunda
 Sunday from 10-11am. We have classes for grade K-6. Bible stories, prayer, arts and crafts, felt \
 boards, and even field trips are all part of this team's activities. On Wednesday evening some of \
 the members of this team chaperone the children's choir during weekly rehearsals. If you enjoy \
-helping children learn about Christ through many different medias, you will love this team. 
+helping children learn about Christ through many different medias, you will love this team.
 
 
 h5. Youth Team
@@ -365,7 +452,7 @@ h5. Bulletin Board Team
 The Bulletin Board Team makes special displays throughout our church to spread God's Word. \
 Displays are made to express selected Biblical messages and others are an important means of \
 communication within the church membership. If you are a creative-type person, this team may be \
-for you. Do you like to work with all sorts of arts, crafts and paints? 
+for you. Do you like to work with all sorts of arts, crafts and paints?
 ENHANCING_WORSHIP
 )
 		fellowship = Article.create!(title: "Fellowship Activities", publish: true,
@@ -414,7 +501,7 @@ h5. Children's Choir
 
 The Children's Choir, directed by Clayton Nunes, provides musical training for the children of \
 the church and enhances services with periodic performances. The practices are aided by those who \
-love energetic children and assist in providing a fun and somewhat orderly activity. 
+love energetic children and assist in providing a fun and somewhat orderly activity.
 MUSIC_TEAM
 )
 		music_team = Article.create!(title: "Supporting Those in Need", publish: true,
@@ -435,7 +522,7 @@ h5. Love Notes Team
 The Love Notes Team creates the Wednesday night prayer sheets. The prayer sheets help Montgomery \
 Hills members continually lift up other members in need throughout the week in their daily prayers \
 and meditations. Six or seven people are needed to lead this team every week to accumulate the \
-prayer requests and send cards. 
+prayer requests and send cards.
 THOSE_IN_NEED
 )
 		tape_ministry = Article.create!(title: "Tape Ministry", publish: true,
@@ -444,7 +531,7 @@ THOSE_IN_NEED
 The Tape Ministry team copies and sends or hand-delivers tapes of the Sunday worship service to \
 shut-ins. This ministry is open to all who feel gifted in the area of copying tapes with the \
 needed machine provided, addressing and mailing packages, possible visiting with house-bound \
-members, or telephoning. 
+members, or telephoning.
 TAPE_MINISTRY
 )
 		welcoming_ministry = Article.create!(title: "Welcoming Ministry", publish: true,
@@ -488,7 +575,7 @@ Eleven members of the team will be participating in a "Blitz Build" for those wh
 homes during Hurricane Katrina. Volunteers will be working on all areas of construction, \
 hospitality, landscaping, painting and others. Countless lives have been forever changed by the \
 hurricanes in the gulf region. But the people of the Gulf Coast are rebuilding, with the help of \
-hundreds of volunteers from across the nation! 
+hundreds of volunteers from across the nation!
 HABITAT
 )
 
@@ -589,7 +676,7 @@ Without you, Deborah's House, and Adalia's and my ministry with it would not be 
 Without you, Esperanza would still be with her abusive partner. Without you, Sarah would still be \
 living a torment greater than we dare contemplate.
 
-We invite you to continue to partner with us. We thank God for people like you. 
+We invite you to continue to partner with us. We thank God for people like you.
 INTERNATIONAL
 )
 
@@ -606,7 +693,7 @@ Center. Their main purpose is to support the Johenning Baptist Center, which in 
 in need. Food baskets are gathered at holiday times, and clothing, art, and school supplies are \
 collected for the children. Monetary donations are sent during the "Souper Bowl" and field trips \
 to the center are planned for anyone interested in helping in a more hands-on way. This ministry \
-fills a great need in our nation's capitol. 
+fills a great need in our nation's capitol.
 JOHENNING
 )
 
@@ -618,7 +705,7 @@ Silver Spring. An informal worship service is conducted for the residents and co
 served. The gifts of compassion, a love of people, singing, reading scripture, sharing poetry \
 or stories, praying, leading, playing the piano or other instruments, serving, greeting, and \
 visiting, are among those needed for this ministry. If you would like to join this ministry \
-team, contact Mrs. Peggy Kullberg at: _kullberg@verizon.net_ 
+team, contact Mrs. Peggy Kullberg at: _kullberg@verizon.net_
 NURSING
 )
 
@@ -631,7 +718,7 @@ their hurried ways, waiting for that eternal traffic light at Georgia Avenue and
 Road, have plenty of time to contemplate their lives. An encouraging statement might be what \
 someone needs on a given day to draw them closer to God. If you have a way with phrases, why \
 don't you put those phrases up in "Lights" for all to see? We are always looking for unique \
-words to bring that one soul to God. 
+words to bring that one soul to God.
 SIGNBOARD
 )
 
@@ -652,7 +739,7 @@ lunch together followed by a time of fellowship, special mission speakers, or wo
 mission projects. They work on such things as preparing baby items to be sent to mission fields \
 and school kits for home and foreign missions. They also contribute to the American Baptist Love \
 Gift and continue to keep in touch with former long-time missionary, Wana Ann Fort through cards, \
-letters and remembrances. 
+letters and remembrances.
 WOMENS
 )
 

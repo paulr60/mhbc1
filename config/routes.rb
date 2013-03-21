@@ -19,7 +19,10 @@ Mhbc1::Application.routes.draw do
   match '/articles_help', to: 'static_pages#help_articles'
   match '/photos_help', to: 'static_pages#help_photos'
   match '/site_info_help', to: 'static_pages#help_site_info'
-  
+
+  match '/article_set', to: 'static_pages#article_set'
+
+  match '/staff', to: 'static_pages#staff'
   match '/contact', to: 'static_pages#contact'
   match '/news', to: 'static_pages#news'
 

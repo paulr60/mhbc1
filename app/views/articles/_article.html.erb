@@ -5,7 +5,7 @@
         </div>
 
         <div class="span5">
-            <%= raw article.summary_text %>
+            <%= raw RedCloth.new(article.summary_text).to_html %>
         </div>
 
         <div class="span2">
@@ -15,15 +15,16 @@
                                             data: { confirm: "Are you sure?" } %>
         </div>
     <% else %>
+        <% pic_size = (@title == 'Staff') ? :bio : :thumb %>
         <div class="span2">
             <% if article.image.blank? == false %>
-                <%= image_tag(photo_version(article.image, :thumb)) %>
+                <%= image_tag(photo_version(article.image, pic_size)) %>
             <% end %>
         </div>
 
         <div class="span7">
             <h5><%= article.title %></h5>
-            <%= raw article.summary_text %>
+            <%= raw RedCloth.new(article.summary_text).to_html %>
             <div class="pull-right readmore">
                 <%= link_to "read more", article, class: "readmore" %>
             </div>

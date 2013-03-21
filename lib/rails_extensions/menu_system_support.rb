@@ -1,5 +1,17 @@
 module MenuSystemSupport
 
+    # Provides support for array of content-items, generating a 'wrapper' page
+    # that will contain blurbs for each article listed in array.
+    def content_path(node)
+        content = node.content
+        if content.kind_of? Array
+            menu = node.menu_path
+            content = "/article_set?title=#{node.name}&menu_path=#{menu}"
+        end
+        content
+    end
+
+    
 	class CmsMenu
 		#
 		# We create one of these for each CMS-type entry in navbar.
@@ -33,7 +45,7 @@ module MenuSystemSupport
 			#@navbar_item = MenuButton.new(@context, tree.name, tree.content)
 
 			if (tree.branches == nil || tree.branches.length == 0)
-				@navbar_item = MenuButton.new(@context, tree.name, content_path(tree.content))
+				@navbar_item = MenuButton.new(@context, tree.name, content_path(tree))
 			else
 				@navbar_item = create_dropdown
 			end
@@ -43,19 +55,14 @@ module MenuSystemSupport
 			dd_items = []
 			t = @tree
 			if t.content.blank? == false
-				dd_items << MenuButton.new(@context, t.name, content_path(t.content))
+				dd_items << MenuButton.new(@context, t.name, content_path(t))
 			end
 			t.branches.each do |b|
-				dd_items << MenuButton.new(@context, b.name, content_path(b.content))
+				dd_items << MenuButton.new(@context, b.name, content_path(b))
 			end
 			return Dropdown.new(@context, t.name, dd_items)			
 		end
 
-		# Provides support for array of content-items, generating a 'wrapper' page
-		# that will contain blurbs for each article listed in array.
-		def content_path(content)
-			content
-		end
 	end
 
     class BreadcrumbData
@@ -92,7 +99,7 @@ module MenuSystemSupport
             #
             node = @tree.find_by_menu_path(menu_path)
             return nil if node == nil
-            MenuButton.new(@context, node.name, node.content)
+            MenuButton.new(@context, node.name, content_path(node))
         end
         def link_list_old()
             links = []
@@ -111,7 +118,7 @@ module MenuSystemSupport
             #
             node = @tree.find_by_menu_path(menu_path)
             return nil if node == nil
-            MenuButton.new(@context, name, node.content)
+            MenuButton.new(@context, name, content_path(node))
         end
     end
 
@@ -124,7 +131,12 @@ module MenuSystemSupport
 			@tree.add_branches(@user_menubar_items)
 			articles.each do |a|
 				chain = a.menu
-				@tree.add_menu_chain_to_tree(chain, "#{@context.article_path(a.id)}")
+                if (chain == 'About:Staff')
+                    destination = '/staff'
+                else
+                    destination = @context.article_path(a.id)
+                end
+				@tree.add_menu_chain_to_tree(chain, destination)
 			end
 			@navbar = create_navbar
 		end
@@ -165,7 +177,7 @@ module MenuSystemSupport
                 if b == this_node    # Is this branch the current page ?
                     items << Label.new(@context, b.name)
                 else
-                    items << MenuButton.new(@context, b.name, b.content)
+                    items << MenuButton.new(@context, b.name, content_path(b))
                 end
             end
 			mb =  MenuBlock.new(@context, crumbs, items)

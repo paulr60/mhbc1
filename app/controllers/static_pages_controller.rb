@@ -7,14 +7,16 @@ class StaticPagesController < ApplicationController
 															  "updated_at DESC")
 	end
 
-    def foo
-        @articles = Article.paginate(page: params[:page], :per_page => 10)
-    end
     def news
-        debugger
         @articles = Article.where("menu IS NULL OR menu == '' ").order("rank DESC",
                                            "updated_at DESC").paginate(page: params[:page],
                                                                        :per_page => 10)
+    end
+
+    def article_set
+        @title = params[:title]
+        target_menu = params[:menu_path]
+        @articles = Article.where("menu LIKE ?", target_menu).order("rank DESC")
     end
     
     def content
