@@ -1,6 +1,6 @@
 <h1>All galleries</h1>
 
-<% if privileged_user?(current_user) %>
+<% if signed_in? && privileged_user?(current_user) %>
     <div class="row">
         <div class="new-content-button pull-right">
             <%= link_to "New Gallery", new_gallery_path, class: "link_button" %>

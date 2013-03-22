@@ -169,7 +169,7 @@ module MenuSystemSupport
                 tree = this_node        #Show links for children
             end
             branches = tree.branches
-            breadcrumbs = BreadcrumbData.new(@context, tree, menu_path)
+            breadcrumbs = BreadcrumbData.new(@context, @tree, menu_path)
             crumbs = breadcrumbs.link_list()
 
             items = []

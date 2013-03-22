@@ -373,7 +373,7 @@ MINISTRIES
 )
 
 		church_action_teams = Article.create!(title: "Church Action Teams", publish: true,
-								menu: 'Ministries:Church',
+								menu: 'Ministries:Church Action Teams',
 								content: "We encourage you to review these Church Action Team " +
 								"descriptions and select one or more that you would like to " +
 								"join.  Where appropriate, new teams are formed in response to " +
@@ -381,7 +381,7 @@ MINISTRIES
 								"click on the items listed on the left.")
 
 		children_and_youth = Article.create!(title: "Children and Youth Ministries", publish: true,
-								menu: 'Ministries:Children and Youth',
+								menu: 'Ministries:Church Action Teams:Children and Youth',
 								content: <<CHILDREN_AND_YOUTH
 These ministries include activities to take care of children and help them become aware of \
 the love of the Lord. These activities range from the care of infants in the nurseries up to \
@@ -416,7 +416,7 @@ good and love unconditionally.
 CHILDREN_AND_YOUTH
 )
 		enhancing_worship = Article.create!(title: "Enhancing the Worship Services", publish: true,
-								menu: 'Ministries:Enhancing Worship',
+								menu: 'Ministries:Church Action Teams:Enhancing Worship',
 								content: <<ENHANCING_WORSHIP
 There are a number of ministry teams dedicated to enhancing the worship and education facilities \
 within and around the church structure.
@@ -456,7 +456,7 @@ for you. Do you like to work with all sorts of arts, crafts and paints?
 ENHANCING_WORSHIP
 )
 		fellowship = Article.create!(title: "Fellowship Activities", publish: true,
-								menu: 'Ministries:Fellowship Activities',
+								menu: 'Ministries:Church Action Teams:Fellowship Activities',
 								content: <<FELLOWSHIP
 
 h5. Sunday Fellowship Gatherings
@@ -482,7 +482,7 @@ this service to the congregation.
 FELLOWSHIP
 )
 		music_team = Article.create!(title: "Music Team", publish: true,
-								menu: 'Ministries:Music Team',
+								menu: 'Ministries:Church Action Teams:Music Team',
 								content: <<MUSIC_TEAM
 The Minister of Music maintains an overall music program including the Sanctuary Choir and the \
 Children's Choir.
@@ -505,7 +505,7 @@ love energetic children and assist in providing a fun and somewhat orderly activ
 MUSIC_TEAM
 )
 		music_team = Article.create!(title: "Supporting Those in Need", publish: true,
-								menu: 'Ministries:Those In Need',
+								menu: 'Ministries:Church Action Teams:Those In Need',
 								content: <<THOSE_IN_NEED
 
 h5. Bereavement Team
@@ -526,7 +526,7 @@ prayer requests and send cards.
 THOSE_IN_NEED
 )
 		tape_ministry = Article.create!(title: "Tape Ministry", publish: true,
-								menu: 'Ministries:Tape Ministry',
+								menu: 'Ministries:Church Action Teams:Tape Ministry',
 								content: <<TAPE_MINISTRY
 The Tape Ministry team copies and sends or hand-delivers tapes of the Sunday worship service to \
 shut-ins. This ministry is open to all who feel gifted in the area of copying tapes with the \
@@ -535,7 +535,7 @@ members, or telephoning.
 TAPE_MINISTRY
 )
 		welcoming_ministry = Article.create!(title: "Welcoming Ministry", publish: true,
-								menu: 'Ministries:Welcoming Ministry',
+								menu: 'Ministries:Church Action Teams:Welcoming Ministry',
 								content: <<WELCOMING_MINISTRY
 There are two teams who welcome persons who come to our church on Sundays. There are those who \
 greet everyone at the doors and help them in any way needed. In addition, a second team of ushers \
@@ -562,13 +562,14 @@ WELCOMING_MINISTRY
 		community_teams = Article.create!(title: "Community and World Action Teams", publish: true,
 								menu: 'Ministries:Community and World',
 								content: <<COMMUNITY_TEAMS
-Teams through which we minister to others. These teams are listed on the left side of this \
-page. Click on the one of interest to you.
+Teams through which we minister to others, both in the nearby community and \
+around the world. These teams are listed on the left side of this page. Take \
+a moment to read the descriptions to see if one may be of interest to you.
 COMMUNITY_TEAMS
 )
 
 		habitat_for_humanity = Article.create!(title: "Habitat for Humanity Team", publish: true,
-								menu: 'Ministries:Habitat for Humanity',
+								menu: 'Ministries:Community and World:Habitat for Humanity',
 								content: <<HABITAT
 The Habitat for Humanity team is planning a mission trip to Baton Rouge, LA from April 22-28. \
 Eleven members of the team will be participating in a "Blitz Build" for those who lost their \
@@ -580,7 +581,7 @@ HABITAT
 )
 
 		international = Article.create!(title: "International Ministries", publish: true,
-								menu: 'Ministries:International',
+								menu: 'Ministries:Community and World:International',
 								content: <<INTERNATIONAL
 We support a number of foreign mission activities. For the moment we list here activities of one \
 of these, the Schellingers.
@@ -681,7 +682,7 @@ INTERNATIONAL
 )
 
 		johenning = Article.create!(title: "Johenning Center", publish: true,
-								menu: 'Ministries:Johenning Center',
+								menu: 'Ministries:Community and World:Johenning Center',
 								content: <<JOHENNING
 The Johenning Baptist Community Center in Anacostia, provides quality out-of-school time \
 enrichment through tutoring (with completion of homework and additional academic instruction), \
@@ -698,7 +699,7 @@ JOHENNING
 )
 
 		nursing = Article.create!(title: "Nursing Center Ministry", publish: true,
-								menu: 'Ministries:Nursing Center',
+								menu: 'Ministries:Community and World:Nursing Center',
 								content: <<NURSING
 One Saturday morning each month a team visits the Layhill Nursing Center on Bel Pre Road in \
 Silver Spring. An informal worship service is conducted for the residents and communion is \
@@ -710,7 +711,7 @@ NURSING
 )
 
 		signboard = Article.create!(title: "Signboard Ministry", publish: true,
-								menu: 'Ministries:Signboard',
+								menu: 'Ministries:Community and World:Signboard',
 								content: <<SIGNBOARD
 The Signboard Ministry team maintains the message on the Church Signboard on Georgia Avenue. \
 Ever wonder what draws someone to our Church every Sunday? Those who drive by our church on \
@@ -723,7 +724,7 @@ SIGNBOARD
 )
 
 		van = Article.create!(title: "Van Ministry", publish: true,
-								menu: 'Ministries:Van',
+								menu: 'Ministries:Community and World:Van',
 								content: <<VAN
 The Van Ministry is for adults who have the gift of good driving and enjoy people. Our Van Team \
 goes out each Sunday morning before Sunday School and picks up children and adults that otherwise \
@@ -732,7 +733,7 @@ VAN
 )
 
 		womens = Article.create!(title: "Ministries:Women's Ministry", publish: true,
-								menu: "Ministries:Women's Ministry",
+								menu: "Ministries:Community and World:Women's Ministry",
 								content: <<WOMENS
 The Baptist Women's Missionary Team meets at the church once a month during the day. They have \
 lunch together followed by a time of fellowship, special mission speakers, or work on various \
