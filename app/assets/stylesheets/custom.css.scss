@@ -231,7 +231,7 @@ footer {
 
 .sidebar-block {
 	margin: 20px 10px;
-	padding: 10px 5px 10px 10px;
+	padding: 10px 5px;
 	background-color: $grayLighter;
     li {
         font-size: 0.9em;
@@ -253,6 +253,13 @@ footer {
 	img {
 		margin: 10px 0;
 	}
+    .divider {
+        color: black;
+    }
+    .breadcrumb {
+        background-color: #f9f9f9;
+        margin: 0 0 15px;
+    }
 }
 
 .sidebar-foo {

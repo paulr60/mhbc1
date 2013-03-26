@@ -5,7 +5,8 @@
 		<%= simple_form_for(@gallery, :html => {:class => 'form-horizontal',
 												:multipart => true }) do |f| %>
 
-			<%-# render 'shared/error_messages' -%>
+        	<% @errmsgs = @gallery.errors.full_messages %>
+			<%= render 'shared/error_messages' %>
 
 			<%-# f.error_messages -%>
 
@@ -20,7 +21,6 @@
 		<% end %>
 	</div>
 </div>
-
 
 <div class="photo-grid">
 	<%= will_paginate @photos %>

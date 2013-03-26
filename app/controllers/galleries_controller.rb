@@ -8,17 +8,18 @@ class GalleriesController < ApplicationController
     end
 
     def create
-         @gallery = Gallery.new(params[:gallery])
+        @gallery = Gallery.new(params[:gallery])
         if @gallery.save
             flash[:success] = "Gallery created"
             redirect_to galleries_path
         else
+            @photos = Photo.paginate(page: params[:page], :per_page => 40)
             render 'new'
         end
     end
 
     def edit
-        @photos = Photo.paginate(page: params[:page], :per_page => 40)        
+        @photos = Photo.paginate(page: params[:page], :per_page => 40)
         begin
             @gallery = Gallery.find(params[:id])
         rescue
@@ -28,11 +29,12 @@ class GalleriesController < ApplicationController
     end
 
     def update
-         @gallery = Gallery.find(params[:id])
+        @gallery = Gallery.find(params[:id])
         if @gallery.update_attributes(params[:gallery])
             flash[:success] = "Gallery updated"
             redirect_to galleries_path
         else
+            @photos = Photo.paginate(page: params[:page], :per_page => 40)
             render 'edit'
         end
     end

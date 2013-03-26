@@ -1,7 +1,7 @@
 <div class="index_row">
 <div class="gallery-row">
 	<div class="span2 gallery-cover">
-		<% cover = cover_photo(gallery.photos) %>
+		<% cover = gallery.cover_photo() %>
 		<%= image_tag(cover.image_url(:thumb)) if cover %>
 	</div>
 

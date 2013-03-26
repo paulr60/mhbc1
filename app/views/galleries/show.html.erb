@@ -1,12 +1,12 @@
 <h1><%= @gallery.name %></h1>
 
 <% if @gallery.description.blank? == false %>
-	<div class="gallery-descriptoin" %>
+	<div class="gallery-description" %>
 		<%= raw RedCloth.new(@gallery.description).to_html %>
 	</div>
 <% end %>
 
-<% @photos = photo_list(@gallery.photos) %>
+<% @photos = @gallery.photo_list() %>
 
 <div class="photo-grid">
 	<% @show_id = false %>
