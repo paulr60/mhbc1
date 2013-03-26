@@ -1,0 +1,6 @@
+<h1>Menu Tree</h1>
+
+<div class="menu-tree-display">
+    <% @ms = MenuSystem.get(self, @site_info, @all_articles) %>
+    <%= @ms.menu_debug_html %>
+</div>

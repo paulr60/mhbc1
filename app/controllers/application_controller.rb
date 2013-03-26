@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
  	before_filter :populate_site_info
  	before_filter :populate_articles
+    before_filter :reset_menu_system
 
  	protected
  		def populate_site_info
@@ -12,4 +13,7 @@ class ApplicationController < ActionController::Base
  		def populate_articles
  			@all_articles = Article.all
  		end
+        def reset_menu_system
+            @ms = MenuSystem.reset
+        end
 end

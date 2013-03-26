@@ -6,9 +6,10 @@
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
 	  <%= render 'layouts/shim' %>
-	</head>
+    </head>
 	<body>
-		<% @ms = MenuSystem.new(self, @site_info, @all_articles) %>
+
+        <% @ms = MenuSystem.get(self, @site_info, @all_articles) %>
 
 		<%= render 'layouts/header' %>
         

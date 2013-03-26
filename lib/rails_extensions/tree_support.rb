@@ -11,10 +11,6 @@ module TreeSupport
 			@content = nil
 		end
 
-		def branches
-			@branches	# Make copy ?
-		end
-
 		def add_branch(b)
 			t = Tree.new(self, b)
 			@branches << t

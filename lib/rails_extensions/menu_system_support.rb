@@ -124,6 +124,7 @@ module MenuSystemSupport
 
 	class MenuSystem
 
+        # Call 'get' not 'new'
 		def initialize(context, site_info, articles)
 			@context = context
 			@user_menubar_items = site_info.menubar.split
@@ -141,12 +142,20 @@ module MenuSystemSupport
 			@navbar = create_navbar
 		end
 
+        @@instance = nil
+        def MenuSystem.get(context, site_info, articles)
+            if @@instance == nil
+                @@instance = self.new(context, site_info, articles)
+            end
+            return @@instance
+        end
+
+        def MenuSystem.reset
+            @@instance = nil
+        end
+
 		def navbar_html
 			@navbar.to_html
-		end
-
-		def dump_to_logger
-			Rails.logger.debug("MyDebug MenuSystem:\n#{debug_text}")
 		end
 
 		def find_node_with_content(content)
@@ -183,6 +192,20 @@ module MenuSystemSupport
 			mb =  MenuBlock.new(@context, crumbs, items)
             return mb
         end
+
+        def menu_debug_html
+            indent = 0
+            html = ''
+            @user_menubar_items.each do |nav|
+                tree = @tree.find_branch_by_name(nav)
+                html += menu_debug_html_helper(indent, tree)
+            end
+            return html.html_safe
+        end
+
+		def dump_to_logger
+			Rails.logger.debug("MyDebug MenuSystem:\n#{debug_text}")
+		end
 
 		def test1(context)
 			r = context.request
@@ -246,6 +269,23 @@ module MenuSystemSupport
 				s
 			end
 
+            def menu_debug_html_helper(indent, tree)
+                html = ' ' * 4 * indent + "<ul>\n"
+
+                btn = MenuButton.new(@context, tree.name, content_path(tree))
+                s = ' ' * 4 * indent + btn.to_html + "\n"
+                html += s.html_safe
+
+                if tree.branches != nil && tree.branches.length > 0
+                    tree.branches.each do |b|
+                        html += menu_debug_html_helper(indent + 1, b)
+                    end
+                end
+
+                html += ' ' * 4 * indent + "</ul>\n"
+                return html.html_safe
+            end
+            
 	end
 
 end
