@@ -1,11 +1,16 @@
 Mhbc1::Application.routes.draw do
 
+  get "events/new"
+
+  get "events/edit"
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :site_infos, only: [:edit, :update]
   resources :articles
   resources :photos
   resources :galleries
+  resources :events
 
   root to: 'static_pages#home'
 

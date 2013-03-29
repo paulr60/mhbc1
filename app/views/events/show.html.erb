@@ -1,0 +1,36 @@
+<h1><%= "Event: #{@event.name}" %></h1>
+
+<p>
+    <%= "Article: #{@event.article}" %>
+</p>
+
+<p>
+    <%= "Date: #{@event.date}" %>
+</p>
+
+<p>
+    <%= "Time: #{@event.start_time}" %>
+</p>
+
+<% if @event.recurring? %>
+    <p>Dates Scheduled:</p>
+    <p>
+        <% dates = @event.date_list %>
+        <% dates.each do |d| %>
+            <%= "#{d.to_s}   " %><br></br>
+        <% end %>
+    </p>
+<% end %>
+
+<br></br>
+<% cal = Calendar.new(2013, 3) %>
+<% rows = cal.dates_to_display %>
+<pre>
+    <% rows.each do |r| %>
+        <% s = "" %>
+        <% r.each do |d| %>
+            <% s += "#{d.mday} " %>
+        <% end %>
+        <%= s %>
+    <% end %>
+</pre>

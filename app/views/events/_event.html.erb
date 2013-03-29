@@ -1,0 +1,19 @@
+<li>
+
+    <div class="span3">
+        <%= link_to event.name, event %>
+    </div>
+
+    <div class="span3">
+        <%= event.date_string %>
+    </div>
+    
+    <div class="span2">
+        <%= link_to "Edit", edit_event_path(event), class: "action_link" %>
+
+        <%= link_to "Delete", event, class: "action_link",
+                                    method: :delete,
+                                    data: { confirm: "Are you sure?" } %>
+    </div>
+
+</li>

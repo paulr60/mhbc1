@@ -3,6 +3,7 @@ require 'rails_extensions/tree_support'
 require 'rails_extensions/menu_tree_support'
 require 'rails_extensions/menu_support'
 require 'rails_extensions/menu_system_support'
+require 'rails_extensions/calendar_support'
 
 class Array
 	include Inject
@@ -18,3 +19,4 @@ include TreeSupport
 include MenuTreeSupport
 include MenuSupport
 include MenuSystemSupport
+include CalendarSupport

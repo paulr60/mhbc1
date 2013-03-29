@@ -1,0 +1,36 @@
+<h1><%= yield(:header) %></h1>
+
+<div class="row">
+	<div class="span8">
+		<%= simple_form_for(@event, :html => {:class => 'form-horizontal'}) do |f| %>
+
+			<%-# render 'shared/error_messages' -%>
+
+			<%= f.input :name %>
+			<%= f.input :article, :as => :text, :input_html => { :rows => 2 },
+                    :label => 'Article(s)',
+                    :placeholder => 'Names of related articles (comma-separated)'%>
+			<%= f.input :date, :placeholder => 'yyyy-mm-dd' %>
+            <%= f.input :start_time, :label => 'Start Time' %>
+            <div class="well">
+                <h4>Fill in these fields for recurring events</h4>
+                <%= f.input :start_date, :placeholder => 'yyyy-mm-dd' %>
+                <%= f.input :end_date, :placeholder => 'yyyy-mm-dd' %>
+                <%= f.input :cancelled_dates, :as => :text,
+                            :input_html => { :rows => 2 } %>
+
+                <p>Event will occur only on days checked below</p>
+                <%= f.input :sun %>
+                <%= f.input :mon %>
+                <%= f.input :tue %>
+                <%= f.input :wed %>
+                <%= f.input :thu %>
+                <%= f.input :fri %>
+                <%= f.input :sat %>
+            </div>
+
+			<%= f.submit yield(:submit_label), class: "btn btn-large btn-primary" %>
+
+		<% end %>
+	</div>
+</div>
