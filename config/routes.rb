@@ -23,6 +23,7 @@ Mhbc1::Application.routes.draw do
   match '/authoring_help', to: 'static_pages#help_general'
   match '/articles_help', to: 'static_pages#help_articles'
   match '/photos_help', to: 'static_pages#help_photos'
+  match '/event_help', to: 'static_pages#help_events'
   match '/site_info_help', to: 'static_pages#help_site_info'
   match '/menu_tree_display', to: 'static_pages#menu_tree_display'
 

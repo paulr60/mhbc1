@@ -6,7 +6,8 @@
 
 			<%-# render 'shared/error_messages' -%>
 
-			<%= f.input :name %>
+			<%= f.input :name, :label => 'Title' %>
+            <%= f.input :abbr, :label => 'Calendar Abbr.' %>
 			<%= f.input :article, :as => :text, :input_html => { :rows => 2 },
                     :label => 'Article(s)',
                     :placeholder => 'Names of related articles (comma-separated)'%>

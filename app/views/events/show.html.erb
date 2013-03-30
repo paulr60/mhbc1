@@ -1,11 +1,7 @@
-<h1><%= "Event: #{@event.name}" %></h1>
+<h1><%= "#{@event.name}" %></h1>
 
 <p>
-    <%= "Article: #{@event.article}" %>
-</p>
-
-<p>
-    <%= "Date: #{@event.date}" %>
+    <%= "Date(s): #{@event.date_string}" %>
 </p>
 
 <p>
@@ -13,12 +9,28 @@
 </p>
 
 <% if @event.recurring? %>
-    <p>Dates Scheduled:</p>
-    <p>
-        <% dates = @event.date_list %>
-        <% dates.each do |d| %>
-            <%= "#{d.to_s}   " %><br></br>
+    <p>Upcoming:
+        <% dates = @event.date_list_starting_now %>
+
+        <% trailer = '' %>
+        <% if dates.length > 5 %>
+            <% dates = dates[0..4] %>
+            <% suffix = '...' %>
         <% end %>
+
+        <% dates = dates.collect { |d| "#{d.strftime('%b %e')}" } %>
+        <% date_string = dates.join(',  ').html_safe %>
+
+        <%= "#{date_string}#{suffix}" %>
     </p>
 <% end %>
 
+<% if @event.article.blank? == false %>
+    <% toks = @event.article.split(',') %>
+    <% @articles = toks.collect { |t| Article.find_by_title(t.strip) } %>
+
+    <% @blurb = true %>
+    <div class="row articles">
+        <%= render @articles %>
+    </div>
+<% end %>

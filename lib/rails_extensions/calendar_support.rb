@@ -98,7 +98,7 @@ module CalendarSupport
             end
 
             def event_html(e)
-                text = e.start_time.blank? ? e.name : e.start_time + ' ' + e.name
+                text = e.start_time.blank? ? e.abbr : e.start_time + ' ' + e.abbr
                 s = '<div class="pull-right">' + @context.link_to(text, e) +
                         '</div><br>'.html_safe
             end

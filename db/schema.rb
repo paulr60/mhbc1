@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328222601) do
+ActiveRecord::Schema.define(:version => 20130330210342) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -36,16 +36,17 @@ ActiveRecord::Schema.define(:version => 20130328222601) do
     t.string   "start_time"
     t.string   "start_date"
     t.string   "end_date"
-    t.boolean  "sun",             :default => true
-    t.boolean  "mon",             :default => true
-    t.boolean  "tue",             :default => true
-    t.boolean  "wed",             :default => true
-    t.boolean  "thu",             :default => true
-    t.boolean  "fri",             :default => true
-    t.boolean  "sat",             :default => true
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.boolean  "sun",             :default => false
+    t.boolean  "mon",             :default => false
+    t.boolean  "tue",             :default => false
+    t.boolean  "wed",             :default => false
+    t.boolean  "thu",             :default => false
+    t.boolean  "fri",             :default => false
+    t.boolean  "sat",             :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.text     "cancelled_dates"
+    t.string   "abbr"
   end
 
   create_table "galleries", :force => true do |t|
