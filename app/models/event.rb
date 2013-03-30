@@ -33,40 +33,26 @@ class Event < ActiveRecord::Base
         start_date.present?
     end
 
-    def Event.dateval(date_string)
-        s = date_string.gsub('/','-')   # Allow either yyyy-mm-dd or yyyy/mm/dd
-        toks = s.split('-')
-        return nil if toks.length != 3
-        d = Date.new(toks[0].to_i, toks[1].to_i, toks[2].to_i)
-        return d
-    end
-
     def active_days
         day_fields = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
         active = day_fields.collect { |f| eval(f) }
-        return active
     end
 
     def cancelled_date_list
-        cancelled = []
         dates = cancelled_dates.split(',')
-        dates.each do |d|
-            cancelled << Event.dateval(d)
-        end
-        return cancelled
+        cancelled = dates.collect { |d| Calendar.date_parse(d) }
     end
 
     def date_list
+        return [Calendar.date_parse(date)] if start_date.blank?
         dates = []
         active = active_days
-        (Event.dateval(start_date)).upto(Event.dateval(end_date)) do |d|
+        (Calendar.date_parse(start_date)).upto(Calendar.date_parse(end_date)) do |d|
             if active[d.wday] && (cancelled_date_list.index(d) == nil)
                 dates << d
             end
         end
         return dates
-        # Filter out dates whose day-of-week aren't enabled
-        # Filter out dates in :cancelled_dates list
     end
 
     def date_string
@@ -81,19 +67,19 @@ class Event < ActiveRecord::Base
         if start_date.blank? && date.blank?
             errors.add :date, "Must enter either Date or StartDate & EndDate"
         end
-        if !date.blank? && !Event.dateval(date)
+        if !date.blank? && !Calendar.date_parse(date)
             errors.add :date, "Illegal date format (yyyy-mm-dd)"
         end
-        if !start_date.blank? && !Event.dateval(start_date)
+        if !start_date.blank? && !Calendar.date_parse(start_date)
             errors.add :start_date, "Illegal date format (yyyy-mm-dd)"
         end        
-        if !end_date.blank? && !Event.dateval(end_date)
+        if !end_date.blank? && !Calendar.date_parse(end_date)
             errors.add :end_date, "Illegal date format (yyyy-mm-dd)"
         end
         if !cancelled_dates.blank?
             dates = cancelled_dates.split(',')
             dates.each do |d|
-                if !Event.dateval(d)
+                if !Calendar.date_parse(d)
                     errors.add :cancelled_dates, "Illegal date format (#{d})"
                 end
             end

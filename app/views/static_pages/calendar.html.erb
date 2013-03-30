@@ -1,0 +1,15 @@
+<% cal = Calendar.new(self, @date.year, @date.month, @events) %>
+
+<div class="row calendar-title">
+    <div class="span8 offset2">
+        <%= link_to "< Prev", :month => (@date.beginning_of_month - 1).to_s %>
+
+        <%= @date.strftime("%B %Y") %>
+
+        <%= link_to " Next >", :month => (@date.end_of_month + 1).to_s %>
+    </div>
+</div>
+
+<table class="table table-bordered calendar">
+    <%= cal.html %>
+</table>

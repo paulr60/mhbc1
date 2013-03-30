@@ -21,4 +21,9 @@ class StaticPagesController < ApplicationController
     
     def content
     end
+
+    def calendar
+        @date = params[:month] ? Date.parse(params[:month]) : Date.today
+        @events = Event.all
+    end
 end

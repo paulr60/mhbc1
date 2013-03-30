@@ -200,6 +200,41 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	margin-top: 15px;
 }
 
+/* Calendar */
+.calendar-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    a {
+        margin: 0 40px;
+        font-weight: normal;
+        font-size: .3em;
+    }
+}
+
+.calendar {
+    th {
+        background-color: $blueLighter;
+        width: 14.286%;
+        text-align: center;
+    }
+    tbody {
+        td {
+            height: 80px;
+            font-size: .9em;
+            line-height: 1.2em;
+        }
+        .other-month {
+            background-color: $grayLighter;
+            font-size: .8em;
+        }
+        a {
+            text-align: right;
+        }
+    }
+}
+
 /* footer */
 
 footer {

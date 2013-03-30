@@ -22,15 +22,3 @@
     </p>
 <% end %>
 
-<br></br>
-<% cal = Calendar.new(2013, 3) %>
-<% rows = cal.dates_to_display %>
-<pre>
-    <% rows.each do |r| %>
-        <% s = "" %>
-        <% r.each do |d| %>
-            <% s += "#{d.mday} " %>
-        <% end %>
-        <%= s %>
-    <% end %>
-</pre>
