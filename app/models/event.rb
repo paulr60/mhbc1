@@ -5,7 +5,7 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)
 #  article         :text
-#  date            :string(255)
+#  date            :text(255)
 #  start_time      :string(255)
 #  start_date      :string(255)
 #  end_date        :string(255)
@@ -31,41 +31,26 @@ class Event < ActiveRecord::Base
 
     validate :valid_args
 
-    def recurring?
-        start_date.present?
-    end
 
     def active_days
         day_fields = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
         active = day_fields.collect { |f| eval(f) }
     end
 
-    def cancelled_date_list
-        dates = cancelled_dates.split(',')
-        cancelled = dates.collect { |d| Calendar.date_parse(d) }
-    end
-
-    def date_list
-        return [Calendar.date_parse(date)] if start_date.blank?
-        dates = []
-        active = active_days
-        (Calendar.date_parse(start_date)).upto(Calendar.date_parse(end_date)) do |d|
-            if active[d.wday] && (cancelled_date_list.index(d) == nil)
-                dates << d
-            end
-        end
-        return dates
-    end
-
-    def date_list_starting_now
-        today = Date.today
-        all_dates = date_list
-        all_dates.delete_if { |d| d < today }
-    end
-
     def date_string
-        s = start_date.blank? ? date : start_date + ' to ' + end_date
+        if start_date.blank? == false
+            prettyprint(start_date) + ' to ' + prettyprint(end_date)
+        else
+            toks = date.split(',')
+            prettyprint(toks[0].strip) + (toks.length > 1 ? '...' : '')
+        end
     end
+
+    def prettyprint(canonical_date_string)
+        d = Date.parse(canonical_date_string)
+        d.strftime('%b %e')
+    end
+    
 
     def valid_args
         if ((start_date.blank? && !end_date.blank?) ||
@@ -75,21 +60,22 @@ class Event < ActiveRecord::Base
         if start_date.blank? && date.blank?
             errors.add :date, "Must enter either Date or StartDate & EndDate"
         end
-        if !date.blank? && !Calendar.date_parse(date)
-            errors.add :date, "Illegal date format (yyyy-mm-dd)"
+        if !date.blank?
+            ds = DateSet.new(date)
+            ds.errs.each do |e|     # This array may be empty (if no errors)
+                errors.add :date, "Illegal date format (#{e})"
+            end
         end
-        if !start_date.blank? && !Calendar.date_parse(start_date)
+        if !start_date.blank? && !Date.parse(start_date)
             errors.add :start_date, "Illegal date format (yyyy-mm-dd)"
         end        
-        if !end_date.blank? && !Calendar.date_parse(end_date)
+        if !end_date.blank? && !Date.parse(end_date)
             errors.add :end_date, "Illegal date format (yyyy-mm-dd)"
         end
         if !cancelled_dates.blank?
-            dates = cancelled_dates.split(',')
-            dates.each do |d|
-                if !Calendar.date_parse(d)
-                    errors.add :cancelled_dates, "Illegal date format (#{d})"
-                end
+            ds = DateSet.new(cancelled_dates)
+            ds.errs.each do |e|     # This array may be empty (if no errors)
+                errors.add :cancelled_dates, "Illegal date format (#{e})"
             end
         end
     end

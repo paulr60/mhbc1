@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
 
 	def home
 		@articles = Article.where(:frontpage => true).order("rank DESC",
-															  "updated_at DESC")
+                                                          "updated_at DESC")
 	end
 
     def news

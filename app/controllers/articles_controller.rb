@@ -47,18 +47,5 @@ class ArticlesController < ApplicationController
         redirect_to articles_path
     end
 
-    private
-
-        def signed_in_user
-            unless signed_in?
-                store_location
-                redirect_to signin_url, notice: "Please sign in."
-            end
-        end
-
-        def privileged_user
-            redirect_to(root_path) unless privileged_user?(current_user)
-        end
-
 end
 

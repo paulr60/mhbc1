@@ -1,16 +1,19 @@
 <h1><%= "#{@event.name}" %></h1>
 
+<% @ed = EventDates.new(@event.date, @event.start_date, @event.end_date, \
+                        @event.active_days, @event.cancelled_dates) %>
+
 <p>
-    <%= "Date(s): #{@event.date_string}" %>
+    <%= "Date(s): #{@ed.date_string}" %>
 </p>
 
 <p>
     <%= "Time: #{@event.start_time}" %>
 </p>
 
-<% if @event.recurring? %>
+<% if @ed.is_range? || @ed.date_list.length > 1 %>
     <p>Upcoming:
-        <% dates = @event.date_list_starting_now %>
+        <% dates = @ed.dates_on_or_after(Date.today) %>
 
         <% trailer = '' %>
         <% if dates.length > 5 %>
@@ -18,10 +21,9 @@
             <% suffix = '...' %>
         <% end %>
 
-        <% dates = dates.collect { |d| "#{d.strftime('%b %e')}" } %>
-        <% date_string = dates.join(',  ').html_safe %>
+        <% dates_text = EventDates.prettyprint(dates).html_safe %>
 
-        <%= "#{date_string}#{suffix}" %>
+        <%= "#{dates_text}#{suffix}" %>
     </p>
 <% end %>
 

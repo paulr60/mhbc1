@@ -11,7 +11,8 @@
 			<%= f.input :article, :as => :text, :input_html => { :rows => 2 },
                     :label => 'Article(s)',
                     :placeholder => 'Names of related articles (comma-separated)'%>
-			<%= f.input :date, :placeholder => 'yyyy-mm-dd' %>
+			<%= f.input :date, :label => 'Date(s)', :placeholder => 'yyyy-mm-dd',
+                    :input_html => { :rows => 2 } %>
             <%= f.input :start_time, :label => 'Start Time' %>
             <div class="well">
                 <h4>Fill in these fields for recurring events</h4>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330210342) do
+ActiveRecord::Schema.define(:version => 20130401192236) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -32,19 +32,19 @@ ActiveRecord::Schema.define(:version => 20130330210342) do
   create_table "events", :force => true do |t|
     t.string   "name"
     t.text     "article"
-    t.string   "date"
+    t.text     "date",            :limit => 255
     t.string   "start_time"
     t.string   "start_date"
     t.string   "end_date"
-    t.boolean  "sun",             :default => false
-    t.boolean  "mon",             :default => false
-    t.boolean  "tue",             :default => false
-    t.boolean  "wed",             :default => false
-    t.boolean  "thu",             :default => false
-    t.boolean  "fri",             :default => false
-    t.boolean  "sat",             :default => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.boolean  "sun",                            :default => false
+    t.boolean  "mon",                            :default => false
+    t.boolean  "tue",                            :default => false
+    t.boolean  "wed",                            :default => false
+    t.boolean  "thu",                            :default => false
+    t.boolean  "fri",                            :default => false
+    t.boolean  "sat",                            :default => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.text     "cancelled_dates"
     t.string   "abbr"
   end

@@ -5,7 +5,7 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)
 #  article         :text
-#  date            :string(255)
+#  date            :text(255)
 #  start_time      :string(255)
 #  start_date      :string(255)
 #  end_date        :string(255)

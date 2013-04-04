@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+    before_filter :signed_in_user,  only: [:new, :create, :edit, :update, :destroy]
+    before_filter :privileged_user, only: [:new, :create, :edit, :update, :destroy]
+    
     def new
         @event = Event.new
     end
@@ -31,7 +34,7 @@ class EventsController < ApplicationController
     end
 
     def index
-        @events = Event.order("name").paginate(page: params[:page], :per_page => 10)
+        @events = Event.order("name").paginate(page: params[:page], :per_page => 30)
     end
 
     def show
