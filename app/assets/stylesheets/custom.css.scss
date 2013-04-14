@@ -142,6 +142,11 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	padding-right: 15px;
 }
 
+.selector .active {
+    color: black;
+    background-color: $grayLighter;
+}
+
 .new-content-button {
 	margin-right: 10px;
 	margin-bottom: 20px;

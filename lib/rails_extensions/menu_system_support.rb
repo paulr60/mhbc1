@@ -65,6 +65,26 @@ module MenuSystemSupport
 
 	end
 
+    class SelectorBlock
+        def initialize(context, path_base, filters, current_filter)
+            @items = []
+            filters.each do |f|
+                filter_val = f.downcase
+                if filter_val == current_filter
+                    mb = MenuButton.new(context, f, '#')
+                    mb.options = {:class => 'active'}
+                    @items << mb
+                else
+                    @items << MenuButton.new(context, f, path_base + filter_val)
+                end
+            end
+            @sel = Selector.new(context, @items)
+        end
+        def to_html
+            @sel.to_html
+        end
+    end
+
     class BreadcrumbData
         def initialize(context, tree, full_path)
             @context = context
@@ -100,25 +120,6 @@ module MenuSystemSupport
             node = @tree.find_by_menu_path(menu_path)
             return nil if node == nil
             MenuButton.new(@context, node.name, content_path(node))
-        end
-        def link_list_old()
-            links = []
-            0...(@partial_paths.length-1).each do |i|
-                links << create_link(@partial_path[i], @path_elems[i])
-            end
-            links << Label.new(@context, @path_elems[-1])
-            return links
-        end
-        def create_link_old(menu_path, name)
-            # menu_path is colon-separated. name is last elem, i.e. what
-            # would appear in the last level menu of menu chain.
-            #
-            # We need to find the associated content (i.e. page to link to)
-            # by searching down menu tree to find node with menu_path in it.
-            #
-            node = @tree.find_by_menu_path(menu_path)
-            return nil if node == nil
-            MenuButton.new(@context, name, content_path(node))
         end
     end
 
@@ -207,12 +208,6 @@ module MenuSystemSupport
 			Rails.logger.debug("MyDebug MenuSystem:\n#{debug_text}")
 		end
 
-		def test1(context)
-			r = context.request
-			n = find_node_for_current_page()
-			rp = r.path
-		end
-
 		#private
 
 			def create_navbar
@@ -243,14 +238,6 @@ module MenuSystemSupport
 				else
 					return MenuButton.new(@context, 'Sign in', @context.signin_path)
 				end
-			end
-
-			def create_cms_menus_old
-				items = []
-				@user_menubar_items.each do |name|
-					items << MenuButton.new(@context, name, '#')
-				end
-				items
 			end
 
 			def create_cms_menus

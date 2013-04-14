@@ -9,20 +9,22 @@ module MenuSupport
 
 	class MenuButton < MenuItem
 		include ActionView::Helpers::TagHelper
+        attr_writer :options
+
 		def initialize(context, text, path)
 			@context = context
 			@text = text
 			@path = path
-			@method = nil
+			@options = {}
 		end
 		def method(m)
-			@method = m
+			@options[:method] = m
 		end
 		def to_html
-			if (@method == nil)
+			if (@options == nil || @options.length == 0)
 				s = @context.link_to(@text, @path)
 			else
-				s = @context.link_to(@text, @path, method: "#{@method}")
+				s = @context.link_to(@text, @path, @options)
 			end
 			Rails.logger.debug("MyDebug MenuButton to_html: #{@path}: (#{s})")
 			content_tag(:li, s)
@@ -74,6 +76,13 @@ module MenuSupport
 		end
 	end
 
+    class Selector < Menu
+        include ActionView::Helpers::TagHelper
+        def menu_wrapper_html(body)
+            content_tag(:ul, body, :class => 'nav nav-pills selector pull-left').html_safe
+        end
+    end
+
 	class MenuBlock < Menu
 		include ActionView::Helpers::TagHelper
 		def initialize(context, breadcrumb_data, items)
@@ -116,20 +125,6 @@ module MenuSupport
 		def to_s
 			"<#{@title}: #{super.to_s}>"
 		end
-	end
-
-	def menu_test(context, site_info)
-		Rails.logger.debug("MyDebugHelperSide2: #{@site_info.menubar.inspect}")
-
-		c = context
-
-		dropdown = Dropdown.new(c, 'Articles', [MenuButton.new(c, 'Index', articles_path),
-												MenuButton.new(c, 'New', new_article_path)])
-		nav = Navbar.new(c, [MenuButton.new(c, 'Home', root_path),
-						  	 MenuButton.new(c, 'SiteInfo', edit_site_info_path(1)),
-						  	 MenuButton.new(c, 'Users', users_path),
-						  	 dropdown])
-		nav.to_html
 	end
 
 end
