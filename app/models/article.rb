@@ -24,7 +24,7 @@ class Article < ActiveRecord::Base
 
 	validates :title, presence: true
 
-    validate :valid_image, :valid_gallery
+    validate :valid_image, :valid_gallery, :valid_menu_entry
 
 	def styled_content
 		RedCloth.new(self.content).to_html
@@ -67,4 +67,40 @@ class Article < ActiveRecord::Base
         errors.add :gallery, "Gallery (#{gallery}) not found" if g == nil
     end
 
+    def valid_menu_entry
+        return if menu.blank?
+        menu_fields = menu.split(':')
+
+        # Make sure first field is in SiteInfo.menubar
+        site_info = SiteInfo.all[0]
+        user_menubar_items = site_info.menubar.split
+        navbar_item = menu_fields[0]
+        if user_menubar_items.include?(navbar_item) == false
+            errors.add :menu, "#{navbar_item} not an entry in SiteInfo menubar list"
+        end
+
+        # Make sure all intermediate fields (not last) already have a 'published'
+        # article whose menu field is that node.  If not, and this article's
+        # publish field is false, warn.  If publish flag set here, fail validate.
+
+        return if publish == false          # Don't need to pass this check on draft
+        return if menu_fields.length < 3    # First and last are skipped here
+        articles = Article.all
+        menu_nodes = []
+        articles.each do |a|
+            menu_nodes << a.menu if a.publish
+        end
+
+        partial = navbar_item
+        1.upto(menu_fields.length - 2) do |n|
+            partial += ':' + menu_fields[n]
+            if menu_nodes.include?(partial) == false
+                errors.add :menu, "Can't publish this article until creating #{partial}"
+            end
+        end
+
+        debugger
+
+        a = user_menubar_items.length
+    end
 end

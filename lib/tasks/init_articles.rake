@@ -441,7 +441,7 @@ and the community. Many gifts are needed in this ministry.
 
 h5. Banner Team
 
-Banners are used on special occasions to enhance the worship environment within the Sactuary. \
+Banners are used on special occasions to enhance the worship environment within the Sanctuary. \
 The Banner Team spreads the Word of God by making banners for seasonal and special occasions; \
 banners that beautify our sanctuary. If you love to cut, sew and glue, our banner team will \
 welcome your talents.

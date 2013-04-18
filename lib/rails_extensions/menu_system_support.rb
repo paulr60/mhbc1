@@ -67,6 +67,7 @@ module MenuSystemSupport
 
     class SelectorBlock
         def initialize(context, path_base, filters, current_filter)
+            current_filter ||= 'all'    # nil means show all articles
             @items = []
             filters.each do |f|
                 filter_val = f.downcase
@@ -132,6 +133,7 @@ module MenuSystemSupport
 			@tree = MenuTree.new(nil, 'root')
 			@tree.add_branches(@user_menubar_items)
 			articles.each do |a|
+                next if a.publish == false  # Draft articles don't add to menus
 				chain = a.menu
                 if (chain == 'About:Staff')
                     destination = '/staff'
