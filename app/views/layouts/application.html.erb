@@ -9,38 +9,49 @@
     </head>
 	<body>
 
-        <% @ms = MenuSystem.get(self, @site_info, @all_articles) %>
-
-		<%= render 'layouts/header' %>
+        <% if params[:action] == 'calendar' %>
+            <% @ms = MenuSystem.get(self, @site_info, @all_articles) %>
+            <%= render 'layouts/header' %>
         
-		<div class="container">
-			<%= render 'layouts/banner' %>
+            <div class="row">
+                <div class="span12">
+                    <div class="body-area">
+                        <%= yield %>
+                    </div>
+                </div>
+            </div>
+        <% else %>
 
-			<div class="row">
- 
-                <% if params[:action] != 'calendar' %>
+            <% @ms = MenuSystem.get(self, @site_info, @all_articles) %>
+
+            <%= render 'layouts/header' %>
+
+            <div class="container">
+                <%= render 'layouts/banner' %>
+
+                <div class="row">
+
                     <div class="span3">
                         <%= render 'layouts/sidebar' %>
                     </div>
-                <% end %>
 
-                <% body_span = (params[:action] == 'calendar') ? 'span12' : 'span9' %>
+                    <div class="span9">
+                        <div class="body-area">
+                            <% flash.each do |key, value| %>
+                                <div class="alert alert-<%= key %>"><%= value %></div>
+                            <% end %>
 
-				<%= "<div class=#{body_span}>".html_safe %>
-					<div class="body-area">
-						<% flash.each do |key, value| %>
-							<div class="alert alert-<%= key %>"><%= value %></div>
-						<% end %>
-						
-						<%= yield %>
-					</div>
-				</div>
+                            <%= yield %>
+                        </div>
+                    </div>
 
-			</div>
+                </div>
 
-			<%= render 'layouts/footer' %>
+                <%= render 'layouts/footer' %>
 
-		</div>
+            </div>
+
+        <% end %>
 
 	</body>
 </html>
