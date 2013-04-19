@@ -22,4 +22,16 @@ class SiteInfo < ActiveRecord::Base
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
+
+    validate :valid_menubar
+
+    def valid_menubar
+        restricted = ['Home', 'News', 'Account']
+        toks = menubar.split
+        toks.each do |t|
+            if restricted.include?(t)
+                errors.add :menubar, "#{t} is not a legal value"
+            end
+        end
+    end
 end
