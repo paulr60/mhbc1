@@ -1,7 +1,51 @@
 <h1>General Help</h1>
 
 <p>
-Articles can be displayed as news stories on either the front page or
-the <em>News</em> page.
+To create new content or modify existing content, the starting point is the
+<em>Edit Content</em> page, which resides under the <em>Account</em> menu.
+Only users with content-authoring permission see this page in their Account menu.
 </p>
 
+<p>
+There are two types of boxes on the <em>Edit Content</em> page, those with blue
+background, and those with white background.  The blue boxes are <em>help</em>
+boxes, the white ones take you to the starting point for editing a particular
+type of content.
+</p>
+
+<p>
+The content to be added to the site comes in the form of <em>Articles</em>,
+<em>Photos</em>, and <em>Events</em>.  Articles can be displayed as news stories
+on either the front page or the <em>News</em> page.  Articles can also be used
+to provide content that users navigate to through menus and sub-menus under the
+Menubar at the top of the window.  Photos can be grouped into <em>Galleries</em>
+of related images, and then either a single photo or a gallery of photos can be
+attached to an <em>Article</em>.  Events are created in order to add items to
+the calendar which can be opened by clicking on the image in the left sidebar.
+</p>
+
+<h5>Menu Structure</h5>
+<p>
+The menubar at the top of the window contains a set standard menu items - Home,
+About, News, and Sign In / Account.  It also has ability for Content Authors to
+add any number of additional custom entries.  Underneath these custom menubar
+entries it is possible to add multiple levels of menus and sub-menus.
+</p>
+
+<p>
+The creation of these menus and sub-menus is done indirectly by specifying in
+the <em>Menu</em> field of <em>Articles</em> the location in the menu-tree where
+each should be found.  The structure of menus and sub-menus is determined
+dynamically by reading the menu field values in each Article and making sure
+the needed menu structure is available to place them as requested.
+</p>
+
+<p>
+To assist content authors with the process of structuring these menus and
+sub-menus, determining the best place to add new content, and making sure that
+mistakes haven't been made in how menus are organized, a debug tool is provided.
+The <em>Menu Debug</em> entry on the <em>Edit Content</em> page shows a listing
+of the current tree structure for all of the menus and sub-menus created from
+the <em>Menu</em> field values in Articles.  Checking this display periodically
+may help to avoid or identify mistakes in those fields.
+</p>

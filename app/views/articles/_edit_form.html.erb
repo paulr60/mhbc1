@@ -23,7 +23,7 @@
 			<%= f.input :frontpage, hint: 'Should summary be seen on front page of site?' %>
 			<%= f.input :rank, :collection => 1..10, :as => :radio_buttons, 
 						item_wrapper_class: 'inline', 
-						hint: 'Higher rank articles listed first. For same rank, newest first.' %>
+						hint: 'Larger number displays first. For same rank, newest first.' %>
 			<%= f.submit yield(:submit_label), class: "btn btn-large btn-primary" %>
 
 		<% end %>
