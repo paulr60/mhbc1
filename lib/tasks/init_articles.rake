@@ -732,7 +732,7 @@ might not be able to get to church.
 VAN
 )
 
-		womens = Article.create!(title: "Ministries:Women's Ministry", publish: true,
+		womens = Article.create!(title: "Women's Ministry", publish: true,
 								menu: "Ministries:Community and World:Women's Ministry",
 								content: <<WOMENS
 The Baptist Women's Missionary Team meets at the church once a month during the day. They have \
@@ -744,6 +744,51 @@ letters and remembrances.
 WOMENS
 )
 
+		Article.create!(title: "100th Anniversary Luncheon", publish: true,
+                                frontpage: true, gallery: "Anniversary Luncheon",
+                                rank: 6,
+								content: <<ANNIV
+The church celebrated its 100th anniversary with a celebration luncheon on Dec. 8, 2012. \
+The event was held at Leisure World, featured a variety of special guest speakers, \
+wonderful fellowship, and some great food.  Everyone attending had a great time.
+ANNIV
+)
+
+		Article.create!(title: "Meal Packaging", publish: true,
+                                frontpage: true,
+                                rank: 9,
+								content: <<MEAL_PACK
+On June 8th we will be hosting a meal packaging event in Bethany Hall.  We are \
+looking for 35-40 volunteers to help with this mission project that will provide \
+10,000 meals for the needy.  Even children age 5 and up can help out with a \
+variety of tasks that will need to be done.
+MEAL_PACK
+)
+
+		Article.create!(title: "Hurricane Sandy Relief", publish: true,
+                                frontpage: true,
+                                rank: 7,
+								content: <<SANDY
+The American Baptist Churches of New Jersey and the American Baptist Home \
+Mission Societies are sponsorng <em>"Coming Together for New Jersey"</em> this \
+Spring and Summer.  Volunteers will come together in New Jersey for a week of \
+service to rebuild, renew, and restore areas affected by Hurricane Sandy. \
+There will be four weeks to choose from: May 4-11, June 1-8, July 13-18, and \
+August 10-17.  For more information contact Pastor Joel.
+SANDY
+)
+
+		Article.create!(title: "ERT Training", publish: true,
+                                frontpage: true,
+                                rank: 8,
+								content: <<ERT
+The church will host Emergency Response Training on May 11, 2013.  A 2 hour long \
+orientation class will begin at 9:00am.  For those taking the orientation class, \
+or who have previously taken that orientation, there will be two other classes \
+following it - Debris Removal and Chainsaw Unit.  Each of these classes will \
+last about 1.5 hours and begin after the orientation.
+ERT
+)
 
 	end
 end

@@ -98,9 +98,5 @@ class Article < ActiveRecord::Base
                 errors.add :menu, "Can't publish this article until creating #{partial}"
             end
         end
-
-        debugger
-
-        a = user_menubar_items.length
     end
 end
