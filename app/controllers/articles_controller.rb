@@ -37,16 +37,16 @@ class ArticlesController < ApplicationController
     def index
         @filter = params[:filter]
         if params[:filter] == 'frontpage'
-            @articles = Article.where(:frontpage => true).paginate(page: params[:page],
+            @articles = Article.where(:frontpage => true).order(:title).paginate(page: params[:page],
                                                                 :per_page => 20)
         elsif params[:filter] == 'news'
-            @articles = Article.where("menu IS NULL OR menu == '' ").paginate(page: params[:page],
+            @articles = Article.where("menu IS NULL OR menu == '' ").order(:title).paginate(page: params[:page],
                                                                 :per_page => 20)
         elsif params[:filter] == 'menus'
-            @articles = Article.where("menu IS NOT NULL AND menu != '' ").paginate(page: params[:page],
+            @articles = Article.where("menu IS NOT NULL AND menu != '' ").order(:title).paginate(page: params[:page],
                                                                 :per_page => 20)
         else    # filter is 'all' or no filter specified
-            @articles = Article.paginate(page: params[:page], :per_page => 20)
+            @articles = Article.order(:title).paginate(page: params[:page], :per_page => 20)
         end
         count = @articles.length
     end

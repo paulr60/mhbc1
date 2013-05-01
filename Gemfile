@@ -11,6 +11,7 @@ gem 'RedCloth', '4.2.9'
 gem 'rmagick', '2.13.1'
 gem 'carrierwave', '0.7.1'
 gem 'nested_form', '0.3.1'
+gem 'fog', '1.10.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
