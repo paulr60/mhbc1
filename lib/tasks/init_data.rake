@@ -5,6 +5,10 @@ namespace :db do
 		puts 'DB Reload complete'
 	end
 
+    task :prod_init => [:defaults, :init_articles, :init_events] do
+        puts 'DB production initialization complete'
+    end
+
 	desc "Load database with initial users and SiteInfo"
 	task defaults: :environment do
 		puts "Loading default users and SiteInfo..."
