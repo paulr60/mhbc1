@@ -59,7 +59,7 @@ class Article < ActiveRecord::Base
     def valid_image
         return if image.blank?
         p = Photo.find_by_name(image)
-        errors.add :image, "Photo (#{image}) not found" if p == nil
+        #errors.add :image, "Photo (#{image}) not found" if p == nil
     end
     def valid_gallery
         return if gallery.blank?
