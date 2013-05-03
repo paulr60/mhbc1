@@ -64,7 +64,7 @@ class Article < ActiveRecord::Base
     def valid_gallery
         return if gallery.blank?
         g = Gallery.find_by_name(gallery)
-        errors.add :gallery, "Gallery (#{gallery}) not found" if g == nil
+        #errors.add :gallery, "Gallery (#{gallery}) not found" if g == nil
     end
 
     def valid_menu_entry
