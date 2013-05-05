@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
 	end
 
     def news
-        @articles = Article.where("menu IS NULL OR menu == '' ").order("rank DESC",
+        @articles = Article.where("menu IS NULL OR menu = '' ").order("rank DESC",
                                            "updated_at DESC").paginate(page: params[:page],
                                                                        :per_page => 10)
     end

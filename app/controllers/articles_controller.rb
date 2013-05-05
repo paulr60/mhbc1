@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
             @articles = Article.where(:frontpage => true).order(:title).paginate(page: params[:page],
                                                                 :per_page => 20)
         elsif params[:filter] == 'news'
-            @articles = Article.where("menu IS NULL OR menu == '' ").order(:title).paginate(page: params[:page],
+            @articles = Article.where("menu IS NULL OR menu = '' ").order(:title).paginate(page: params[:page],
                                                                 :per_page => 20)
         elsif params[:filter] == 'menus'
             @articles = Article.where("menu IS NOT NULL AND menu != '' ").order(:title).paginate(page: params[:page],
