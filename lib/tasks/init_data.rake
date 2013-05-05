@@ -5,7 +5,7 @@ namespace :db do
 		puts 'DB Reload complete'
 	end
 
-    task :prod_init => [:defaults, :init_articles, :init_events] do
+    task :prod_init => [:defaults, :init_photos, :init_articles, :init_events] do
         puts 'DB production initialization complete'
     end
 
