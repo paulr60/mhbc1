@@ -22,7 +22,8 @@ namespace :db do
 		end
 
 		$total_files = 0
-		root = '/home/paul/Pictures/mhbc_photos'
+		#root = '/home/paul/Pictures/mhbc_photos'[
+        root = Rails.root.to_s + '/lib/tasks/init_images/mhbc_photos'
 		load_dirtree(root)
 		puts "Total files = #{$total_files}"
 
