@@ -21,3 +21,6 @@ public/uploads
 # Ignore netbeans files
 nbproject/
 
+# Contains AWS credentials and shouldn't be put on github
+config/initializers/aws_init.rb
+
