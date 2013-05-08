@@ -22,9 +22,17 @@ class Article < ActiveRecord::Base
  	attr_accessible :content, :frontpage, :image, :gallery, :label, :menu, 
  					:publish, :rank, :summary, :title, :author
 
+    before_validation :strip_whitespace
+
 	validates :title, presence: true
 
     validate :valid_image, :valid_gallery, :valid_menu_entry
+
+    def strip_whitespace
+        self.title.strip!
+        self.image.strip!
+        self.gallery.strip!
+    end
 
 	def styled_content
 		RedCloth.new(self.content).to_html
@@ -59,12 +67,12 @@ class Article < ActiveRecord::Base
     def valid_image
         return if image.blank?
         p = Photo.find_by_name(image)
-        #errors.add :image, "Photo (#{image}) not found" if p == nil
+        errors.add :image, "Photo (#{image}) not found" if p == nil
     end
     def valid_gallery
         return if gallery.blank?
         g = Gallery.find_by_name(gallery)
-        #errors.add :gallery, "Gallery (#{gallery}) not found" if g == nil
+        errors.add :gallery, "Gallery (#{gallery}) not found" if g == nil
     end
 
     def valid_menu_entry

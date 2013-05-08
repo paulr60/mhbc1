@@ -16,6 +16,8 @@
 class SiteInfo < ActiveRecord::Base
  	attr_accessible :address, :email, :phone, :title, :weekly, :menubar
 
+    before_validation :strip_whitespace
+
  	validates :address, presence: true
  	validates :title, presence: true
 	validates :phone, presence: true, length: { minimum: 12 }
@@ -24,6 +26,13 @@ class SiteInfo < ActiveRecord::Base
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
 
     validate :valid_menubar
+
+    def strip_whitespace
+        self.title.strip!
+        self.phone.strip!
+        self.email.strip!
+        self.address.strip!
+    end
 
     def valid_menubar
         restricted = ['Home', 'News', 'Account']

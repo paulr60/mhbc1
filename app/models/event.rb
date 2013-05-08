@@ -27,10 +27,20 @@ class Event < ActiveRecord::Base
             :start_date, :end_date, :cancelled_dates,
             :sun, :mon, :tue, :wed, :thu, :fri, :sat
 
+    before_validation :strip_whitespace
+
 	validates :name, presence: true
 
     validate :valid_args
 
+    def strip_whitespace
+        self.name.strip!
+        self.article.strip!
+        self.date.strip!
+        self.start_time.strip!
+        self.start_date.strip!
+        self.end_date.strip!
+    end
 
     def active_days
         day_fields = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']

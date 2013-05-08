@@ -66,17 +66,16 @@ module MenuSystemSupport
 	end
 
     class SelectorBlock
-        def initialize(context, path_base, filters, current_filter)
-            current_filter ||= 'all'    # nil means show all articles
+        def initialize(context, path_base, options, current_option)
             @items = []
-            filters.each do |f|
-                filter_val = f.downcase
-                if filter_val == current_filter
-                    mb = MenuButton.new(context, f, '#')
+            options.each do |o|
+                opt_val = o.downcase
+                if opt_val == current_option
+                    mb = MenuButton.new(context, o, '#')
                     mb.options = {:class => 'active'}
                     @items << mb
                 else
-                    @items << MenuButton.new(context, f, path_base + filter_val)
+                    @items << MenuButton.new(context, o, path_base + opt_val)
                 end
             end
             @sel = Selector.new(context, @items)

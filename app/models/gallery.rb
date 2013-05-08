@@ -13,9 +13,16 @@
 class Gallery < ActiveRecord::Base
     attr_accessible :name, :description, :photos
 
+    before_validation :strip_whitespace
+
     validates :name, presence: true
     validates :photos, presence: true
     validate :validate_photo_list
+
+    def strip_whitespace
+        self.name.strip!
+        self.photos.strip!
+    end
 
     def validate_photo_list
         errs = self.photo_list_validate()

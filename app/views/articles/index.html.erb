@@ -1,7 +1,7 @@
 <h1>Articles</h1>
 
-<% sb = SelectorBlock.new(self, '/articles?filter=',
-                             ['All', 'FrontPage', 'News', 'Menus'],
+<% sb = SelectorBlock.new(self, "/articles?sort=#{@sort.downcase}&filter=",
+                             ['All', 'FrontPage', 'News', 'Menus', 'Drafts'],
                              @filter) %>
 
 <div class="row">
@@ -12,6 +12,13 @@
 		<%= link_to "New Article", new_article_path, class: "link_button" %>
         <br></br>
 	</div>
+</div>
+
+<% sb2 = SelectorBlock.new(self, "/articles?filter=#{@filter.downcase}&sort=",
+                             ['Alphabetical', 'ByEditDate'],
+                             @sort) %>
+<div class="row">
+    <%= sb2.to_html %>
 </div>
 
 <div class="row">

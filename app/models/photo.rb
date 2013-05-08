@@ -12,11 +12,16 @@
 class Photo < ActiveRecord::Base
  	attr_accessible :name, :image
 
+    before_validation :strip_whitespace
+
 	validates :name, presence: true
 
 	mount_uploader :image, ImageUploader
 
-    
+    def strip_whitespace
+        self.name.strip!
+    end
+
 	def image_size(version)
     	self.image_url(version)
     end
