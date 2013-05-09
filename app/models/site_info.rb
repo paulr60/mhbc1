@@ -34,6 +34,10 @@ class SiteInfo < ActiveRecord::Base
         self.address.strip!
     end
 
+    def facebook
+        "http://www.facebook.com/groups/47631568230"
+    end
+
     def valid_menubar
         restricted = ['Home', 'News', 'Account']
         toks = menubar.split
