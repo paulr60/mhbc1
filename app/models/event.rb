@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
 
     before_validation :strip_whitespace
 
-	validates :name, presence: true
+	validates :name, presence: true, uniqueness: true
 
     validate :valid_args
 

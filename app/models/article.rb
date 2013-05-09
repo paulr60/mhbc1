@@ -24,7 +24,7 @@ class Article < ActiveRecord::Base
 
     before_validation :strip_whitespace
 
-	validates :title, presence: true
+	validates :title, presence: true, uniqueness: true
 
     validate :valid_image, :valid_gallery, :valid_menu_entry
 

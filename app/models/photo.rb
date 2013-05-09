@@ -14,7 +14,7 @@ class Photo < ActiveRecord::Base
 
     before_validation :strip_whitespace
 
-	validates :name, presence: true
+	validates :name, presence: true, uniqueness: true
 
 	mount_uploader :image, ImageUploader
 
