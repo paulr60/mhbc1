@@ -63,6 +63,7 @@ class Event < ActiveRecord::Base
     
 
     def valid_args
+        valid_article if article.blank? == false
         if ((start_date.blank? && !end_date.blank?) ||
             (!start_date.blank? && end_date.blank?))
             errors.add :start_date, "Must enter both Start & End date or neither"
@@ -86,6 +87,17 @@ class Event < ActiveRecord::Base
             ds = DateSet.new(cancelled_dates)
             ds.errs.each do |e|     # This array may be empty (if no errors)
                 errors.add :cancelled_dates, "Illegal date format (#{e})"
+            end
+        end
+    end
+
+    # Can be single article name or comma-separated list
+    def valid_article
+        toks = article.split(',')
+        toks.each do |t|
+            t.strip!
+            if Article.find_by_title(t) == nil
+                errors.add :article, "(#{t}) not found"
             end
         end
     end
