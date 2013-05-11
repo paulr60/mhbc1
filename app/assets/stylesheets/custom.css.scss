@@ -96,7 +96,14 @@ p {
 
 #banner {
 	background-color: $blue1;
-	padding: 30px 50px 30px 50px;
+	padding: 40px 38px;
+}
+
+.no-pad {
+    background-color: $white;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .navbar {

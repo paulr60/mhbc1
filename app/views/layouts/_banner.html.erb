@@ -1,3 +1,8 @@
 <div id="banner">
-	<%= image_tag("header3.gif", alt: "banner") %>
+	<%-# image_tag("header3.gif", alt: "banner") -%>
+    <div class="no-pad">
+        <%= link_to image_tag($banner.logo_image), '/', class: "no-pad" %>
+
+        <%= link_to image_tag($banner.banner_image), '/', class: "no-pad" %>
+    </div>
 </div>

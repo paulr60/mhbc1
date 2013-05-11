@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401192236) do
+ActiveRecord::Schema.define(:version => 20130510011637) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -69,10 +69,14 @@ ActiveRecord::Schema.define(:version => 20130401192236) do
     t.string   "phone"
     t.string   "email"
     t.string   "address"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "weekly"
     t.string   "menubar"
+    t.string   "logo"
+    t.string   "bannerpic"
+    t.integer  "logowidth"
+    t.integer  "calendarheight"
   end
 
   create_table "users", :force => true do |t|
