@@ -20,8 +20,8 @@ class Gallery < ActiveRecord::Base
     validate :validate_photo_list
 
     def strip_whitespace
-        self.name.strip!
-        self.photos.strip!
+        self.name.strip!    if self.name.blank? == false
+        self.photos.strip!  if self.photos.blank? == false
     end
 
     def validate_photo_list

@@ -1,8 +1,15 @@
 <div id="banner">
 	<%-# image_tag("header3.gif", alt: "banner") -%>
     <div class="no-pad">
-        <%= link_to image_tag($banner.logo_image), '/', class: "no-pad" %>
-
-        <%= link_to image_tag($banner.banner_image), '/', class: "no-pad" %>
+        <% pics = @site_info.custom_bannerpics %>
+        <% if pics && pics.length >= 2 %>
+            <%= link_to image_tag(pics[0].image_url(:logo)), '/', class: "no-pad" %>
+            <%= link_to image_tag(pics[1].image_url(:banner)), '/', class: "no-pad" %>
+        <% else %>
+            <% pics = @site_info.default_bannerpics %>
+            <% pics.each do |p| %>
+                <%= link_to image_tag(p), '/', class: "no-pad" %>
+            <% end %>
+        <% end %>
     </div>
 </div>

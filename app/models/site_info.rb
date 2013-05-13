@@ -2,32 +2,22 @@
 #
 # Table name: site_infos
 #
-#  id             :integer          not null, primary key
-#  title          :string(255)
-#  phone          :string(255)
-#  email          :string(255)
-#  address        :string(255)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  weekly         :string(255)
-#  menubar        :string(255)
-#  logo           :string(255)
-#  bannerpic      :string(255)
-#  logowidth      :integer
-#  calendarheight :integer
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  phone      :string(255)
+#  email      :string(255)
+#  address    :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  weekly     :string(255)
+#  menubar    :string(255)
+#  bannerpic  :string(255)
 #
 
-require 'RMagick'
-include Magick
-
 class SiteInfo < ActiveRecord::Base
- 	attr_accessible :address, :email, :phone, :title, :weekly, :menubar,
-                    :logo, :bannerpic, :logowidth
-
-    attr_accessor :logo_image, :banner_image
+ 	attr_accessible :address, :email, :phone, :title, :weekly, :menubar, :bannerpic
 
     before_validation :strip_whitespace
-    before_save :create_banner_images
 
  	validates :address, presence: true
  	validates :title, presence: true
@@ -36,15 +26,14 @@ class SiteInfo < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
 
-    validate :valid_menubar, :valid_logo, :valid_bannerpic, :valid_logowidth
+    validate :valid_menubar, :valid_bannerpic
 
     def strip_whitespace
-        self.title.strip!
-        self.phone.strip!
-        self.email.strip!
-        self.address.strip!
-        self.logo.strip!
-        self.bannerpic.strip!
+        self.title.strip! if self.title.blank? == false
+        self.phone.strip! if self.phone.blank? == false
+        self.email.strip! if self.email.blank? == false
+        self.address.strip!   if self.address.blank? == false
+        self.bannerpic.strip! if self.bannerpic.blank? == false
     end
 
     def facebook
@@ -61,39 +50,67 @@ class SiteInfo < ActiveRecord::Base
         end
     end
 
-    def valid_logowidth
-        return if logowidth.blank? || (logowidth >= 0 && logowidth <= 100)
-        errors.add :logowidth, "Must be >= 0 and <= 100"
+    def default_bannerpics
+        ['default_logo.jpg', 'default_bannerpic.jpg']
     end
     
-    def valid_logo
-        return if logo.blank?
-        p = Photo.find_by_name(logo)
-        errors.add :logo, "Photo (#{logo}) not found" if p == nil
+    def custom_bannerpics
+        pics = valid_bannerpic
+        return pics
     end
 
     def valid_bannerpic
-        return if bannerpic.blank?
-        p = Photo.find_by_name(bannerpic)
-        errors.add :bannerpic, "Photo (#{bannerpic}) not found" if p == nil
+        return false if bannerpic.blank?
+        toks = bannerpic.split(',')
+        if toks.length != 2
+            errors.add :bannerpic, "List names of logo & banner photos, comma-separated"
+            return false
+        end
+        pics = []
+        toks.each do |t|
+            t.strip!
+            p = Photo.find_by_name(t)
+            if p == nil
+                errors.add :bannerpic, "Photo #{t} not found"
+                return false
+            end
+            pics << p
+        end
+        return pics
     end
+    
+#    def valid_bannerpic
+#        return false if bannerpic.blank?
+#        debugger
+#        target_width = 860
+#        target_height = nil
+#        total_width = 0
+#        toks = bannerpic.split(',')
+#        pics = []
+#        toks.each do |t|
+#            t.strip!
+#            p = Photo.find_by_name(t)
+#            if p
+#                pics << p
+#                if p.custom_sized? == false
+#                    errors.add :bannerpic, "#{t} does not have custom size set"
+#                    return false
+#                end
+#                target_height ||= p.custom_height
+#                if p.custom_height != target_height
+#                    errors.add :bannerpic, "Mismatched custom heights"
+#                    return false
+#                end
+#                total_width += p.custom_width
+#            else
+#                errors.add :bannerpic, "Photo #{t} not found"
+#            end
+#        end
+#        if total_width > target_width
+#            errors.add :bannerpic, "Total width (#{total_width}) > max width (#{target_width})"
+#            return false
+#        end
+#        return pics
+#    end
 
-    def create_banner_images
-        base_logo_pic = logo.blank? ? ActionController::Base.helpers.asset_path('default_logo.jpg') :
-                                        Photo.find_by_name(logo).image_url
-        base_bannerpic = bannerpic.blank? ? ActionController::Base.helpers.asset_path('default_bannerpic.jpg') :
-                                        Photo.find_by_name(bannerpic).image_url
-        debugger
-
-        lw_pct = logowidth || 30
-        lw = 860 * lw_pct / 100
-        bw = 860 * (100 - lw_pct) / 100
-        ht = 220
-
-        # li = Magick::Image.read(base_logo_pic)
-        # bi = Magick::Image.read(base_bannerpic)
-
-        # $global.logo_image = li
-        # $global.banner_image = bi
-    end
 end

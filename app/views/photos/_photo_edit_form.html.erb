@@ -5,15 +5,13 @@
 		<%= simple_form_for(@photo, :html => {:class => 'form-horizontal',
 												:multipart => true }) do |f| %>
 
-			<%-# render 'shared/error_messages' -%>
-
-			<%-# f.error_messages -%>
 
 			<%= f.input :name %>
 
 			<%= link_to(image_tag(@photo.image_url(:bio), class: "controls"), @photo.image_url) unless @photo.image_url.blank? %>
 
 			<%= f.input :image, :as => :file %>
+            <%-# f.input :custom_size, hint: 'For banner pictures only. Width x Height, e.g. 440 x 220' -%>
 
 			<%= f.submit yield(:submit_label), class: "btn btn-large btn-primary" %>
 

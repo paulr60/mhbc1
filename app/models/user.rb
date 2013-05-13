@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
   	validates :password_confirmation, presence: true
 
 	def strip_whitespace
-        self.name.strip!
-        self.email.strip!
+        self.name.strip!    if self.name.blank? == false
+        self.email.strip!   if self.email.blank? == false
     end
 
 	private

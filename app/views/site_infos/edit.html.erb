@@ -9,9 +9,7 @@
             <%= f.input :phone %>
             <%= f.input :address %>
             <%= f.input :email %>
-            <%= f.input :logo, placeholder: 'Name of photo to use on left of banner area' %>
-            <%= f.input :bannerpic, placeholder: 'Name of photo to use on right of banner area' %>
-            <%= f.input :logowidth, placeholder: 'Percentage of banner width to use for logo' %>
+            <%= f.input :bannerpic, hint: 'Comma-separated list of photos for banner (860 wide)' %>
 
             <%= f.input :weekly, :as => :text, :input_html => { :rows => 10 } %>
 

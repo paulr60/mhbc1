@@ -34,12 +34,12 @@ class Event < ActiveRecord::Base
     validate :valid_args
 
     def strip_whitespace
-        self.name.strip!
-        self.article.strip!
-        self.date.strip!
-        self.start_time.strip!
-        self.start_date.strip!
-        self.end_date.strip!
+        self.name.strip!        if self.name.blank? == false
+        self.article.strip!     if self.article.blank? == false
+        self.date.strip!        if self.date.blank? == false
+        self.start_time.strip!  if self.start_time.blank? == false
+        self.start_date.strip!  if self.start_date.blank? == false
+        self.end_date.strip!    if self.end_date.blank? == false
     end
 
     def active_days

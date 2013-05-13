@@ -40,13 +40,25 @@ class ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_limit => [600, 400]
   end
 
-  version :bio do
+  version :bio, :from_version => :slide do
     process :resize_to_limit => [200, 200]
   end
 
-  version :thumb do
-    #process :resize_to_limit => [100, 100]
+  version :thumb, :from_version => :bio do
     process :resize_and_pad => [100, 100]
+  end
+
+  #version :custom, :if => :is_custom? do
+#  version :custom do
+#      process :resize_and_pad => [model.custom_width, model.custom_height]
+#  end
+
+  version :logo, :from_version => :slide do
+      process :resize_and_pad => [340, 220]
+  end
+
+  version :banner, :from_version => :slide do
+      process :resize_to_fill => [520, 220]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -60,5 +72,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  protected
+
+    def is_custom? photo
+        debugger
+        model.custom_sized?
+    end
 
 end

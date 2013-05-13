@@ -1,7 +1,7 @@
 
 aws_bucket = 'media.montgomeryhillsbaptistchurch.com'
 if Rails.env.development?
-    aws_bucket += '_devel'
+    aws_bucket = 'devel.' + aws_bucket
 end
 
 CarrierWave.configure do |config|
