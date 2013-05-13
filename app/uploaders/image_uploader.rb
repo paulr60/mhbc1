@@ -75,9 +75,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   protected
 
-    def is_custom? photo
-        debugger
-        model.custom_sized?
-    end
+#    def is_custom? photo
+#        debugger
+#        model.custom_sized?
+#    end
 
 end
