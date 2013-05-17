@@ -136,6 +136,10 @@ module MenuSystemSupport
 				chain = a.menu
                 if (chain == 'About:Staff')
                     destination = '/staff'
+                elsif (chain == 'Blog')
+                    destination = '/blog'
+                elsif (chain == 'About:Contact')
+                    destination = '/contact'
                 else
                     destination = @context.article_path(a.id)
                 end

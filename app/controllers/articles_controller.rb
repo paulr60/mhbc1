@@ -41,6 +41,7 @@ class ArticlesController < ApplicationController
         fval = case @filter
                     when 'frontpage' then {:frontpage => true}
                     when 'news'      then "menu IS NULL OR menu = '' "
+                    when 'blog'      then "menu = 'Blog' "
                     when 'menus'     then "menu IS NOT NULL AND menu != '' "
                     when 'drafts'    then {:publish => false }
                 end

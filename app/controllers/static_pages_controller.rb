@@ -13,6 +13,11 @@ class StaticPagesController < ApplicationController
                                                                        :per_page => 10)
     end
 
+    def blog
+        @articles = Article.where("menu = 'Blog' ").order("rank DESC",
+                                "updated_at DESC").paginate(page: params[:page], :per_page => 10)
+    end
+
     def article_set
         @title = params[:title]
         target_menu = params[:menu_path]

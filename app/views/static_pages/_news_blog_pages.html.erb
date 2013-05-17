@@ -1,0 +1,14 @@
+<h1><%= yield(:header) %></h1>
+
+<div class="row">
+	<%= will_paginate @articles %>
+</div>
+
+<% @blurb = true %>
+<div class="row articles">
+	<%= render @articles %>
+</div>
+
+<div class="row">
+	<%= will_paginate @articles %>
+</div>

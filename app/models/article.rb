@@ -32,6 +32,7 @@ class Article < ActiveRecord::Base
         self.title.strip!   if self.title.blank? == false
         self.image.strip!   if self.image.blank? == false
         self.gallery.strip! if self.gallery.blank? == false
+        self.menu.strip!    if self.menu.blank? == false
     end
 
 	def styled_content
@@ -78,6 +79,13 @@ class Article < ActiveRecord::Base
     def valid_menu_entry
         return if menu.blank?
         menu_fields = menu.split(':')
+        # Remove inappropriate whitespace and ensure each field starts w/ capital
+        debugger
+        menu_fields.each do |f|
+            f.strip!
+            f.capitalize!
+        end
+        self.menu = menu_fields.join(':')
 
         # Make sure first field is in SiteInfo.menubar
         site_info = SiteInfo.all[0]
@@ -85,6 +93,12 @@ class Article < ActiveRecord::Base
         navbar_item = menu_fields[0]
         if user_menubar_items.include?(navbar_item) == false
             errors.add :menu, "#{navbar_item} not an entry in SiteInfo menubar list"
+        end
+
+        # If first field is 'Blog', must be only field
+        if menu_fields[0] == 'Blog' && menu_fields.length > 1
+            errors.add :menu, "Blog can't have sub-menus"
+            return
         end
 
         # Make sure all intermediate fields (not last) already have a 'published'
