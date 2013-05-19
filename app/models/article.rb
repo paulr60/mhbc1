@@ -80,7 +80,6 @@ class Article < ActiveRecord::Base
         return if menu.blank?
         menu_fields = menu.split(':')
         # Remove inappropriate whitespace and ensure each field starts w/ capital
-        debugger
         menu_fields.each do |f|
             f.strip!
             f.capitalize!

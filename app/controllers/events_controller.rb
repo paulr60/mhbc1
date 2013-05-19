@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-    before_filter :signed_in_user,  only: [:new, :create, :edit, :update, :destroy]
-    before_filter :privileged_user, only: [:new, :create, :edit, :update, :destroy]
+    before_filter :signed_in_user,  only: [:index, :new, :create, :edit, :update, :destroy]
+    before_filter :privileged_user, only: [:index, :new, :create, :edit, :update, :destroy]
     
     def new
         @event = Event.new
