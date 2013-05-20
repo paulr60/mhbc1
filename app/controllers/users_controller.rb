@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         if @user.save
             sign_in @user
             flash[:success] = "Welcome to Montgomery Hills Baptist Church website"
-            redirect_to @user
+            redirect_to '/help'
   		else
   			render 'new'
   		end

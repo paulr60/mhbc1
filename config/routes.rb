@@ -34,6 +34,7 @@ Mhbc1::Application.routes.draw do
   match '/news', to: 'static_pages#news'
   match '/blog', to: 'static_pages#blog'
   match '/calendar', to: 'static_pages#calendar'
+  match '/help', to: 'static_pages#help_new_user'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
