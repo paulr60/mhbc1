@@ -61,7 +61,7 @@ class Article < ActiveRecord::Base
 
 	def byline
 		s = ''
-		s += ('by ' + self.author + ' - ') if !self.author.blank?
+		s += ('by ' + author_list_minus_admin + ' - ') if !self.author.blank?
 		s + edit_date
 	end
 
@@ -79,10 +79,9 @@ class Article < ActiveRecord::Base
     def valid_menu_entry
         return if menu.blank?
         menu_fields = menu.split(':')
-        # Remove inappropriate whitespace and ensure each field starts w/ capital
+        # Remove inappropriate whitespace
         menu_fields.each do |f|
             f.strip!
-            f.capitalize!
         end
         self.menu = menu_fields.join(':')
 
@@ -120,4 +119,13 @@ class Article < ActiveRecord::Base
             end
         end
     end
+
+    protected
+
+        def author_list_minus_admin
+            toks = self.author.split(',')
+            filtered_toks = toks.delete_if { |t| t == 'Admin User' }
+            return filtered_toks.join(',')
+        end
+
 end

@@ -476,9 +476,9 @@ great ideas; then this may be the team for you.
 
 h5. Wednesday Fellowship Dinners
 
-Except for the summer months, dinners are held at 6:15 pm on Wednesdays. Dinner Teams have the \
-responsibility to purchase and prepare the food. A number of teams rotate from week to week in \
-this service to the congregation.
+Except for the summer months, dinners are held at 6:15 pm on Wednesdays. Reservations \
+can be made on Sunday with the registration form, or by calling the Church Office. \
+A modest charge is made for the meals.
 FELLOWSHIP
 )
 		music_team = Article.create!(title: "Music Team", publish: true,
@@ -720,6 +720,10 @@ Road, have plenty of time to contemplate their lives. An encouraging statement m
 someone needs on a given day to draw them closer to God. If you have a way with phrases, why \
 don't you put those phrases up in "Lights" for all to see? We are always looking for unique \
 words to bring that one soul to God.
+
+You may want to recommend the posting of information about upcoming events.  If \
+you have a suggestion about information to be posted, call or email the \
+Church Office.
 SIGNBOARD
 )
 
@@ -778,17 +782,6 @@ August 10-17.  For more information contact Pastor Joel.
 SANDY
 )
 
-		Article.create!(title: "ERT Training", publish: true,
-                                frontpage: true,
-                                rank: 8,
-								content: <<ERT
-The church will host Emergency Response Training on May 11, 2013.  A 2 hour long \
-orientation class will begin at 9:00am.  For those taking the orientation class, \
-or who have previously taken that orientation, there will be two other classes \
-following it - Debris Removal and Chainsaw Unit.  Each of these classes will \
-last about 1.5 hours and begin after the orientation.
-ERT
-)
 
 	end
 end
