@@ -145,6 +145,7 @@ module MenuSystemSupport
                 end
 				@tree.add_menu_chain_to_tree(chain, destination)
 			end
+            @tree.add_menu_chain_to_tree('About:Photo Galleries', '/galleries')
             @tree.add_menu_chain_to_tree('About:Help', '/help')
 			@navbar = create_navbar
 		end

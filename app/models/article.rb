@@ -61,7 +61,8 @@ class Article < ActiveRecord::Base
 
 	def byline
 		s = ''
-		s += ('by ' + author_list_minus_admin + ' - ') if !self.author.blank?
+        authors = author_list_minus_admin
+		s += ('by ' + authors + ' - ') if !authors.blank?
 		s + edit_date
 	end
 
@@ -123,9 +124,10 @@ class Article < ActiveRecord::Base
     protected
 
         def author_list_minus_admin
+            return '' if self.author.blank?
             toks = self.author.split(',')
-            filtered_toks = toks.delete_if { |t| t == 'Admin User' }
-            return filtered_toks.join(',')
+            filtered_toks = toks.delete_if { |t| t.strip == 'Admin User' }
+            return filtered_toks.join(', ')
         end
 
 end
