@@ -3,18 +3,19 @@ class StaticPagesController < ApplicationController
     before_filter :privileged_user, only: [:content]
 
 	def home
-		@articles = Article.where(:frontpage => true).order("rank DESC",
+		@articles = Article.where(:frontpage => true, :publish => true).order("rank DESC",
                                                           "updated_at DESC")
 	end
 
     def news
-        @articles = Article.where("menu IS NULL OR menu = '' ").order("rank DESC",
+        @articles = Article.published.where("(menu IS NULL OR menu = '') ").order("rank DESC",
+        #@articles = Article.where(:menu.blank? => true).order("rank DESC",
                                            "updated_at DESC").paginate(page: params[:page],
                                                                        :per_page => 10)
     end
 
     def blog
-        @articles = Article.where("menu = 'Blog' ").order("rank DESC",
+        @articles = Article.published.where("menu = 'Blog' ").order("rank DESC",
                                 "updated_at DESC").paginate(page: params[:page], :per_page => 10)
     end
 

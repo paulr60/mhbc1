@@ -28,6 +28,8 @@ class Article < ActiveRecord::Base
 
     validate :valid_image, :valid_gallery, :valid_menu_entry
 
+    scope :published, where(:publish => true)
+
     def strip_whitespace
         self.title.strip!   if self.title.blank? == false
         self.image.strip!   if self.image.blank? == false
