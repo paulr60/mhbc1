@@ -14,8 +14,9 @@
 
 	<div class="sidebar-block">
         <% addr = @site_info.address %>
-		<%= link_to image_tag('map_icon200.jpg'), "https://maps.google.com/maps?q=#{addr}" %>
-	</div>
+		<%-# link_to image_tag('map_icon200.jpg'), "https://maps.google.com/maps?q=#{addr}" -%>
+        <%= link_to image_tag('map_icon200.jpg'), 'https://maps.google.com/maps?q=9727+Georgia+Ave.+Silver+Spring,+MD+20910&hnear=9727+Georgia+Ave,+Silver+Spring,+Maryland+20910&t=m&z=16' %>
+    </div>
 
 	<div class="sidebar-block">
 		<%= link_to image_tag('calendar_thumb200.jpg'), "/calendar" %>
