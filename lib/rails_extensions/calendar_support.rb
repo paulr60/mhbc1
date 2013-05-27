@@ -100,10 +100,13 @@ module CalendarSupport
             @year = year
             @month = month
             @events = events
+
+            @last_day_cache = Date.new(@year, @month + 1, 1) - 1
+            @first_day_cache = Date.new(@year, @month, 1)
         end
 
         def last_day
-            Date.new(@year, @month + 1, 1) - 1
+            @last_day_cache
         end
 
         def num_days_in_month
@@ -112,8 +115,7 @@ module CalendarSupport
 
         # Day of week of 1st day of this month (Sun = 0)
         def first_wday
-            d = Date.new(@year, @month, 1)
-            d.wday
+            @first_day_cache.wday
         end
 
         # Day of week of last day of this month (Sun = 0)
@@ -125,7 +127,7 @@ module CalendarSupport
         # that will fully fill table to be rendered.
         def dates_to_display
             rows = []
-            day1 = Date.new(@year, @month, 1)
+            day1 = @first_day_cache
             sunday = day1 - first_wday
             end_of_month = last_day
             while sunday <= end_of_month
@@ -144,6 +146,16 @@ module CalendarSupport
 
         private
 
+            def event_dates
+                ed_list = []
+                @events.each do |e|
+                    ed = EventDates.new(e.date, e.start_date, e.end_date,
+                                                e.active_days, e.cancelled_dates)
+                    ed_list << [e, ed]
+                end
+                return ed_list
+            end
+
             def table_header_html
                 days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
                         'Thursday', 'Friday', 'Saturday']
@@ -157,17 +169,23 @@ module CalendarSupport
 
             def table_body_html(dates)
                 s = "<tbody>\n"
+                ed_list = event_dates
                 dates.each do |date_row|
                     s += "\t<tr>\n"
                     date_row.each do |d|
                         event_links = ''
-                        @events.each do |e|
-                            ed = EventDates.new(e.date, e.start_date, e.end_date,
-                                                e.active_days, e.cancelled_dates)
-                            if ed.date_list.index(d)
-                                event_links += event_html(e)
+                        ed_list.each do |ed_elem|
+                            if ed_elem[1].date_list.index(d)
+                                event_links += event_html(ed_elem[0])
                             end
                         end
+#                        @events.each do |e|
+#                            ed = EventDates.new(e.date, e.start_date, e.end_date,
+#                                                e.active_days, e.cancelled_dates)
+#                            if ed.date_list.index(d)
+#                                event_links += event_html(e)
+#                            end
+#                        end
                         cl = (d.mon == @month) ? 'this-month' : 'other-month'
                         s += "\t\t<td class=\"#{cl}\">"
                         s += "<div class='pull-right'>#{d.mday}</div>"

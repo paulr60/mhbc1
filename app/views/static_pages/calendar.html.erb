@@ -1,4 +1,8 @@
+<% t0 = Time.now %>
+
 <% cal = Calendar.new(self, @date.year, @date.month, @events) %>
+
+<% t1 = Time.now %>
 
 <div class="row calendar-title">
     <div class="span8 offset2">
@@ -13,3 +17,7 @@
 <table class="table table-bordered calendar">
     <%= cal.html %>
 </table>
+
+<% t2 = Time.now %>
+
+<%= "new: #{(t1 - t0) * 1000} ms,   html: #{(t2 - t1) * 1000} ms" %>
