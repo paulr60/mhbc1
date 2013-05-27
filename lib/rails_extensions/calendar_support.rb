@@ -169,7 +169,9 @@ module CalendarSupport
                             end
                         end
                         cl = (d.mon == @month) ? 'this-month' : 'other-month'
-                        s += "\t\t<td class=\"#{cl}\">#{d.mday}#{event_links}</td>\n"
+                        s += "\t\t<td class=\"#{cl}\">"
+                        s += "<div class='pull-right'>#{d.mday}</div>"
+                        s += "#{event_links}</td>\n"
                     end
                     s += "\t</tr>\n"
                 end
@@ -179,7 +181,7 @@ module CalendarSupport
 
             def event_html(e)
                 text = e.start_time.blank? ? e.abbr : e.start_time + ' ' + e.abbr
-                s = '<div class="pull-right">' + @context.link_to(text, e) +
+                s = '<div class="pull-left">' + @context.link_to(text, e) +
                         '</div><br>'.html_safe
             end
     end
