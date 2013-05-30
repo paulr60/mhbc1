@@ -1,7 +1,7 @@
 <h1><%= "#{@event.name}" %></h1>
 
 <% @ed = EventDates.new(@event.date, @event.start_date, @event.end_date, \
-                        @event.active_days, @event.cancelled_dates) %>
+                        @event.active_days, @event.cancelled_dates, nil, nil) %>
 
 <p>
     <%= "Date(s): #{@ed.date_string}" %>

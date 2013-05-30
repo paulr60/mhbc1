@@ -37,13 +37,11 @@ module CalendarSupport
         attr_reader :dates, :errs
 
         def initialize(from, to, days_of_week, cancelled_dates)
-            @from = from
-            @to = to
+            @from = from    # 'Date' instance
+            @to = to        # 'Date' instance
             @cancelled_dates = cancelled_dates
-            @errs = @from.errs + @to.errs
             @dates = []
-            return if @errs.length > 0
-            @from.dates[0].upto(@to.dates[0]) do |d|
+            @from.upto(@to) do |d|
                 if days_of_week[d.wday] && (@cancelled_dates.dates.index(d) == nil)
                     @dates << d
                 end
@@ -55,15 +53,28 @@ module CalendarSupport
         end
     end
 
+    class FilteredDateRange < DateRange
+        def initialize(from, to, days_of_week, cancelled, window_start, window_end)
+            if window_start && window_end
+                start_date = (from > window_start) ? from : window_start
+                end_date = (to < window_end) ? to : window_end
+            else
+                start_date = from
+                end_date = to
+            end
+            super(start_date, end_date, days_of_week, cancelled)
+        end
+    end
+
     class EventDates
-        def initialize(date, start_date, end_date, active, cancelled)
+        def initialize(date, start_date, end_date, active, cancelled, window_start, window_end)
             @date_set = DateSet.new(date)
             if start_date.blank? == false
                 @start_date_set = DateSet.new(start_date)
                 @end_date_set = DateSet.new(end_date)
                 @cancelled_date_set = DateSet.new(cancelled)
-                @date_range = DateRange.new(@start_date_set, @end_date_set,
-                                            active, @cancelled_date_set)
+                @date_range = FilteredDateRange.new(@start_date_set.dates[0], @end_date_set.dates[0],
+                                            active, @cancelled_date_set, window_start, window_end)
             end
         end
         def is_range?
@@ -146,11 +157,12 @@ module CalendarSupport
 
         private
 
-            def event_dates
+            def event_dates(window_start, window_end)
                 ed_list = []
                 @events.each do |e|
                     ed = EventDates.new(e.date, e.start_date, e.end_date,
-                                                e.active_days, e.cancelled_dates)
+                                                e.active_days, e.cancelled_dates,
+                                                window_start, window_end)
                     ed_list << [e, ed]
                 end
                 return ed_list
@@ -169,7 +181,9 @@ module CalendarSupport
 
             def table_body_html(dates)
                 s = "<tbody>\n"
-                ed_list = event_dates
+                window_start = dates[0][0]
+                window_end = dates[-1][-1]
+                ed_list = event_dates(window_start, window_end)
                 dates.each do |date_row|
                     s += "\t<tr>\n"
                     date_row.each do |d|
