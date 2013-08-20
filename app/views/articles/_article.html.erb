@@ -19,7 +19,9 @@
         <div class="span2">
             <% if article.image.blank? == false %>
                 <% photo = Photo.photo_object(article.image) %>
-                <%= image_tag(photo.image_size(pic_size)) %>
+                <% if photo.image_size(pic_size) %>
+                    <%= image_tag(photo.image_size(pic_size)) %>
+                <% end %>
             <% end %>
         </div>
 

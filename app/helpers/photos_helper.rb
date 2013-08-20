@@ -6,7 +6,8 @@ module PhotosHelper
         p = Photo.photo_object(name)
     	return "" if !p
 
-    	link_to(image_tag(p.image_url(version)), p.image_url)
+        return "" if (!p.image_url || !p.image_url(version))
+        link_to(image_tag(p.image_url(version)), p.image_url)
     end
     
 end

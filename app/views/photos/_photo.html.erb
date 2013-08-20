@@ -1,7 +1,9 @@
 <div class="span2">
 	<div class="thumbnail">
 		<div class="photo-index-thumb">
-			<%= link_to(image_tag(photo.image_url(:thumb)), photo.image_url) %>
+            <% if photo.image_url && photo.image_url(:thumb) %>
+                <%= link_to(image_tag(photo.image_url(:thumb)), photo.image_url) %>
+            <% end %>
 		</div>
 		<div class="thumb-name">
 			<%= photo.name %>
